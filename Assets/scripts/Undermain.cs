@@ -583,9 +583,22 @@ public class Undermain : MonoBehaviour
     {   
         //this checks the room for ay monsters and chests
         roomCheck = Random.Range(1, 21);
+        if (roomCheck >= 5)
+        {
+            ClearLog();
+            shop = true;
+            chest = false;
+            monster = false;
+            backgroundAudioChange(shopSong);
+            SoundEffect(shopEnter);
+            Debug.Log("You Walk Into A Shop. There Is Someone Standing There.");
+            Debug.Log("OH hello there young man how may i help you today human");
+            Debug.Log("Z: Buy Items, X: Chat, C: Leave");
+        }
         if (roomCheck >= 10)
         {
             monster = true;
+            shop = false;
             turn = true;
             Debug.Log("a monster proached you");
             Debug.Log("What Will You Deside To Do?");
@@ -630,19 +643,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("You Now Have " + food + " Healing Items!");
                 chest = false;
             }                
-        }
-        if (roomCheck >= 5)
-        {
-            ClearLog();
-            shop = true;
-            chest = false;
-            monster = false;
-            backgroundAudioChange(shopSong);
-            SoundEffect(shopEnter);
-            Debug.Log("You Walk Into A Shop. There Is Someone Standing There.");
-            Debug.Log("OH hello there young man how may i help you today human");
-            Debug.Log("Z: Buy Items, X: Chat, C: Leave");
-        }
+        }        
     }
     //this is the menu system
     void Menu()
