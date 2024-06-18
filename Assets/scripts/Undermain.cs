@@ -582,68 +582,89 @@ public class Undermain : MonoBehaviour
     void RoomCheck()
     {   
         //this checks the room for ay monsters and chests
-        roomCheck = Random.Range(1, 21);
-        if (roomCheck >= 5)
+        roomCheck = Random.Range(1, 5);
+        switch (roomCheck)
         {
-            ClearLog();
-            shop = true;
-            chest = false;
-            monster = false;
-            backgroundAudioChange(shopSong);
-            SoundEffect(shopEnter);
-            Debug.Log("You Walk Into A Shop. There Is Someone Standing There.");
-            Debug.Log("OH hello there young man how may i help you today human");
-            Debug.Log("Z: Buy Items, X: Chat, C: Leave");
-        }
-        if (roomCheck >= 10)
-        {
-            monster = true;
-            shop = false;
-            turn = true;
-            Debug.Log("a monster proached you");
-            Debug.Log("What Will You Deside To Do?");
-            Debug.Log("Z: Fight");
-            Debug.Log("X: Act");
-            Debug.Log("C: Item");
-            Debug.Log("V: Spare");
-            monsterDefence = Random.Range(1, 17);
-            if (floor == 1 && monster == true)
-            {
-                backgroundAudioChange(battle);
-            }
-            if (floor == 2 && monster == true)
-            {
-                backgroundAudioChange(battle2);
-            }
-            if (floor == 3 && monster == true)
-            {
-                backgroundAudioChange(battle3);
-            }
-            if (floor == 4 && monster == true)
-            {
-                backgroundAudioChange(battle4);
-            }
-        }
-        //this checks for chests in the room
-        if (roomCheck >= 18)
-        {
-            chest = true;
-            if (chest == true && monster == false)
-            {
-                Debug.Log("There Is A Chest In This Room 'huh i wonder if it has anything useful");
-                food = food + Random.Range(1, 10);
-                Debug.Log("You grabbed " + food + "Healing Items From The Chest");
+            case 5:
+                ClearLog();
+                shop = true;
                 chest = false;
-            }
-            if (chest == true && monster == true)
-            {
-                food = food + Random.Range(1, 10);
-                Debug.Log("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
-                Debug.Log("You Leap Towards The Chest In A Hurry And Grab Everything You Thought Was Useful");
-                Debug.Log("You Now Have " + food + " Healing Items!");
-                chest = false;
-            }                
-        }        
+                monster = false;
+                backgroundAudioChange(shopSong);
+                SoundEffect(shopEnter);
+                Debug.Log("You Walk Into A Shop. There Is Someone Standing There.");
+                Debug.Log("OH hello there young man how may i help you today human");
+                Debug.Log("Z: Buy Items, X: Chat, C: Leave");
+                break;
+            case 4:
+                monster = true;
+                shop = false;
+                turn = true;
+                Debug.Log("a monster proached you");
+                Debug.Log("What Will You Deside To Do?");
+                Debug.Log("Z: Fight");
+                Debug.Log("X: Act");
+                Debug.Log("C: Item");
+                Debug.Log("V: Spare");
+                monsterDefence = Random.Range(1, 17);
+                switch (monster)
+                {
+                    case true:
+                        switch (floor)
+                        {
+                            case 1:
+                                backgroundAudioChange(battle);
+                                break;
+                            case 2:
+                                backgroundAudioChange(battle2);
+                                break;
+                            case 3:
+                                backgroundAudioChange(battle3);
+                                break;
+                            case 4:
+                                backgroundAudioChange(battle4);
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case 3:
+                chest = true;
+                monster = true;
+                switch (chest)
+                {
+                    case true:
+                        switch (monster)
+                        {
+                            case true:
+                                food = food + Random.Range(1, 10);
+                                Debug.Log("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
+                                Debug.Log("You Leap Towards The Chest In A Hurry And Grab Everything You Thought Was Useful");
+                                Debug.Log("You Now Have " + food + " Healing Items!");
+                                chest = false;
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case 2:
+                chest = true;
+                switch (chest)
+                {
+                    case true:
+                        switch (monster)
+                        {
+                            case false:
+                                Debug.Log("There Is A Chest In This Room 'huh i wonder if it has anything useful");
+                                food = food + Random.Range(1, 10);
+                                Debug.Log("You grabbed " + food + "Healing Items From The Chest");
+                                chest = false;
+                                break;
+                        }
+                        break;
+                }
+                break;
+        }
     }
     //this is the menu system
     void Menu()
