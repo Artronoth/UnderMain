@@ -487,70 +487,62 @@ public class Undermain : MonoBehaviour
     // this holds all the dialouge for the intro it is quite big but thats because it was to tell a story before the game starts
     void Intro()
     {
-        if (dialougIntro == 1)
+        switch (dialougIntro)
         {
-            Debug.Log("your at home sitting in a arm chair swaying back and forth happily");
-            Debug.Log("you feel as if everything was finaly peaceful even though you just got home from work");
-            Debug.Log("everything was perfect for you in that moment");
-            Debug.Log("untill...");
-            Debug.Log("Press Space To Continue: ");
-            backgroundAudioChange(intro);
-
-        }
-        if (dialougIntro == 2)
-        {
-            Debug.Log("you start to feel hungery 'ugg i could really go for some food right about now'");
-            Debug.Log("you could head up to the kitchen and go get some food but the chair is too comfortable 'uhhgg but i really dont wanna have to get up'");
-            Debug.Log("you get out the chair anyway because you are very hungery after all 'ok just a little snack wont hurt then i can sit down before the chair gets cold again'");
-            Debug.Log("once you arive at the kitchen you see the counter top your fridge and some other standerd kitchen stuff");
-            Debug.Log("as you open the fridge you suddenly feel a sharp pain in your chest 'AAHh what the heck!' you say out loud");
-            Debug.Log("Press Space To Continue: ");
-
-        }
-        if (dialougIntro == 3)
-        {
-
-            backgroundAudioChange(introTense);
-            Debug.Log("the feeling gets more and more intense as you fall to the floor in pain 'AHHH WHAT IS HAPPENING'");
-            Debug.Log("as the feeling continues to get worse you start to see hear a voice in the distance (hey... hey wake up... HEY!.. I DIDNT BRING YOU ALL THIS WAY TO NAP!)");
-            Debug.Log("this voice seams familiar but you dont know where you hurd it from 'WHO ARE YOU! *coughing* WHERE ARE YOU! *cough*'");
-            Debug.Log("you feel a sharp pain rush to your head 'OH NOT MORE PAIN!' (W A K E  U P !)");
-            Debug.Log("Press Space To Continue: ");
-
-
-        }
-        if (dialougIntro == 4)
-        {
-            Debug.Log("suddenly you awake in this Forest like place youre memory starts to return to you. you were asleep all along");
-            Debug.Log("another person is with you but you remember who they are now. their name is jake he was taking you on a journy to a mountain for a job");
-            Debug.Log("JAKE: dude finally you wake up. shesh i thought i would have to be sitting here all day. anyway the place of the job should be just up here");
-            Debug.Log("as you both head up the mountain you slip and fall into a hole 'AAAHH JAKE' aaannd fall on you back 'Ooof'");
-            Debug.Log("after a couple of secconds you stand back up. you can hear jake yelling but you have fallen down too far to hear him");
-            Debug.Log("Press Space To Continue");
-            backgroundAudioChange(introWoken);
-        }
-        if (dialougIntro == 5)
-        {
-            Debug.Log("you shout at the top of your lungs 'JAKE DONT WORRY IM OK GO SEE IF YOU CAN GET HELP FOR ME WHILE I TRY AND FIND A WAY OUT!' jake goes silent");
-            Debug.Log("as you look around you dont see anything familiar everything looks like ruins");
-            Debug.Log("you end up walking forward and enter into a room... there is a flower... its smileing at you...");
-            Debug.Log("as you approach the flower it suddenly jerks into the ground and dissapiers saying (Y O U  A R E  N O T  T H E  O N E)");
-            Debug.Log("as confused as you are you dont mind it and you head to the this big ruined tower looking thing");
-            Debug.Log("Press Space To Continue");
-        }
-        if (dialougIntro == 6)
-        {
-            Debug.Log("as you walk up to this tower there is a sign on the front saying [welcome to the underground a place full of monsters and wonder]");
-            Debug.Log("[this place has been built a long time ago howe*%@$#& get out is from reaching the fith floor of this tower");
-            Debug.Log("[this is no ordanary place however it was built by humans back during the #@7@$&^*)( times]");
-            Debug.Log("[there will be trials there so be careful as you progress the floors things may get more difficult but we believe in you]");
-            Debug.Log("[i sadly can no longer be there to help guide you through these ruins fallen one but i hope this sign finds you well]");
-            Debug.Log("Toriel");
-            Debug.Log("You Now Have A Choice To Make You Can Either Wait For Jake, Continue Through The Ruins Or Read The Sign Again What Shall You Do");
-            Debug.Log("Tab: Wait");
-            Debug.Log("Enter: Continue");
-            Debug.Log("Space: Read Sign");
-            introCMP = true;
+            case 1:
+                Debug.Log("your at home sitting in a arm chair swaying back and forth happily");
+                Debug.Log("you feel as if everything was finaly peaceful even though you just got home from work");
+                Debug.Log("everything was perfect for you in that moment");
+                Debug.Log("untill...");
+                Debug.Log("Press Space To Continue: ");
+                backgroundAudioChange(intro);
+                break;
+            case 2:
+                Debug.Log("you start to feel hungery 'ugg i could really go for some food right about now'");
+                Debug.Log("you could head up to the kitchen and go get some food but the chair is too comfortable 'uhhgg but i really dont wanna have to get up'");
+                Debug.Log("you get out the chair anyway because you are very hungery after all 'ok just a little snack wont hurt then i can sit down before the chair gets cold again'");
+                Debug.Log("once you arive at the kitchen you see the counter top your fridge and some other standerd kitchen stuff");
+                Debug.Log("as you open the fridge you suddenly feel a sharp pain in your chest 'AAHh what the heck!' you say out loud");
+                Debug.Log("Press Space To Continue: ");
+                break;
+            case 3:
+                backgroundAudioChange(introTense);
+                Debug.Log("the feeling gets more and more intense as you fall to the floor in pain 'AHHH WHAT IS HAPPENING'");
+                Debug.Log("as the feeling continues to get worse you start to see hear a voice in the distance (hey... hey wake up... HEY!.. I DIDNT BRING YOU ALL THIS WAY TO NAP!)");
+                Debug.Log("this voice seams familiar but you dont know where you hurd it from 'WHO ARE YOU! *coughing* WHERE ARE YOU! *cough*'");
+                Debug.Log("you feel a sharp pain rush to your head 'OH NOT MORE PAIN!' (W A K E  U P !)");
+                Debug.Log("Press Space To Continue: ");
+                break;
+            case 4:
+                Debug.Log("suddenly you awake in this Forest like place youre memory starts to return to you. you were asleep all along");
+                Debug.Log("another person is with you but you remember who they are now. their name is jake he was taking you on a journy to a mountain for a job");
+                Debug.Log("JAKE: dude finally you wake up. shesh i thought i would have to be sitting here all day. anyway the place of the job should be just up here");
+                Debug.Log("as you both head up the mountain you slip and fall into a hole 'AAAHH JAKE' aaannd fall on you back 'Ooof'");
+                Debug.Log("after a couple of secconds you stand back up. you can hear jake yelling but you have fallen down too far to hear him");
+                Debug.Log("Press Space To Continue");
+                backgroundAudioChange(introWoken);
+                break;
+            case 5:
+                Debug.Log("you shout at the top of your lungs 'JAKE DONT WORRY IM OK GO SEE IF YOU CAN GET HELP FOR ME WHILE I TRY AND FIND A WAY OUT!' jake goes silent");
+                Debug.Log("as you look around you dont see anything familiar everything looks like ruins");
+                Debug.Log("you end up walking forward and enter into a room... there is a flower... its smileing at you...");
+                Debug.Log("as you approach the flower it suddenly jerks into the ground and dissapiers saying (Y O U  A R E  N O T  T H E  O N E)");
+                Debug.Log("as confused as you are you dont mind it and you head to the this big ruined tower looking thing");
+                Debug.Log("Press Space To Continue");
+                break;
+            case 6:
+                Debug.Log("as you walk up to this tower there is a sign on the front saying [welcome to the underground a place full of monsters and wonder]");
+                Debug.Log("[this place has been built a long time ago howe*%@$#& get out is from reaching the fith floor of this tower");
+                Debug.Log("[this is no ordanary place however it was built by humans back during the #@7@$&^*)( times]");
+                Debug.Log("[there will be trials there so be careful as you progress the floors things may get more difficult but we believe in you]");
+                Debug.Log("[i sadly can no longer be there to help guide you through these ruins fallen one but i hope this sign finds you well]");
+                Debug.Log("Toriel");
+                Debug.Log("You Now Have A Choice To Make You Can Either Wait For Jake, Continue Through The Ruins Or Read The Sign Again What Shall You Do");
+                Debug.Log("Tab: Wait");
+                Debug.Log("Enter: Continue");
+                Debug.Log("Space: Read Sign");
+                introCMP = true;
+                break;
         }
     }
     void Dialouge()
