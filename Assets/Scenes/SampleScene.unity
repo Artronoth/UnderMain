@@ -401,6 +401,8 @@ MonoBehaviour:
   rooms: 0
   floor: 1
   flirt: 0
+  price: 0
+  money: 0
   menu: 0
   turn: 0
   fight: 0
@@ -420,6 +422,9 @@ MonoBehaviour:
   monster: 0
   chest: 0
   shop: 0
+  artifact: 0
+  artifactUsed: 0
+  artifactLife: 0
   background: {fileID: 113229014}
   SFX: {fileID: 60669697}
   intro: {fileID: 8300000, guid: 3a4c784d42b38c445880f80de420db32, type: 3}
