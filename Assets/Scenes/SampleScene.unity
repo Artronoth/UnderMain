@@ -433,7 +433,7 @@ MonoBehaviour:
   forthFloorPremonition: {fileID: 8300000, guid: ee878b0305dbfcf41b3a6257ac2e421e, type: 3}
   forthFloorLab: {fileID: 8300000, guid: 4511e3199d1163d4f94fb57194fc3bdd, type: 3}
   forthFloorLore: {fileID: 0}
-  shopSong: {fileID: 0}
+  shopSong: {fileID: 8300000, guid: 88deec582d2d13a42ab3ffec925415e6, type: 3}
   battle: {fileID: 8300000, guid: a844e0229fcc628439cd810f8db8d185, type: 3}
   battle2: {fileID: 8300000, guid: c1d68d9754f51e240b1ffc34cab6c815, type: 3}
   battle3: {fileID: 8300000, guid: 2a8002e5983d13541a6ed7f0eb92c289, type: 3}
@@ -444,7 +444,7 @@ MonoBehaviour:
   attack: {fileID: 8300000, guid: 3f9248c4fe95d364e86dc904b43a224c, type: 3}
   hit: {fileID: 8300000, guid: bc3ba080d06b7fe40915ed9f3bedf636, type: 3}
   move: {fileID: 8300000, guid: 0102f1b456f18e84593352b0f544f3b3, type: 3}
-  shopEnter: {fileID: 0}
+  shopEnter: {fileID: 8300000, guid: dde08787e265e2e409cf99494221c4d1, type: 3}
   kill: {fileID: 8300000, guid: f8c50a9c25c1b4e4faeb6ce3b56856da, type: 3}
   crit: {fileID: 8300000, guid: 0b55325bb4a58aa44a6e18bbbe6f4b6a, type: 3}
   levelUp: {fileID: 8300000, guid: 719daede7005daa48b26d08cda56cbcf, type: 3}
