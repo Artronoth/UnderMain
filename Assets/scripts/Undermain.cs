@@ -582,7 +582,7 @@ public class Undermain : MonoBehaviour
     void RoomCheck()
     {   
         //this checks the room for ay monsters and chests
-        roomCheck = Random.Range(1, 5);        
+        roomCheck = Random.Range(1, 6);        
         switch (roomCheck)
         {
             case 5:
@@ -749,6 +749,7 @@ public class Undermain : MonoBehaviour
             SoundEffect(select);
             Debug.Log("What would you like to buy human");
             Debug.Log("We have plenty of items to choose from");
+
         }
     }
     // this clears the logs when required e.g when the dialouge is playing (got from the net because i couldnt figure out how to do it)
