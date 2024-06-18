@@ -37,6 +37,8 @@ public class Undermain : MonoBehaviour
     public int rooms;
     public int floor;
     public int flirt;
+    public int price;
+    public int money;
     public bool menu;
     public bool turn;
     public bool fight;
@@ -56,6 +58,9 @@ public class Undermain : MonoBehaviour
     public bool monster;
     public bool chest;
     public bool shop;
+    public bool artifact;
+    public bool artifactUsed;
+    public int artifactLife;
     #endregion
     //Audio Sources
     #region Audio Sources
@@ -102,7 +107,6 @@ public class Undermain : MonoBehaviour
     {
         Debug.Log("press A to start: ");
         manager = FindObjectOfType<AudioSource>();
-
     }
 
     // Update is called once per frame
@@ -237,6 +241,7 @@ public class Undermain : MonoBehaviour
             {
                 ClearLog();
                 monster = false;
+                shop = false;
                 floor = floor + 1;                
                 dialougIntro = dialougIntro + 1;
                 dialouge = true;
@@ -296,7 +301,7 @@ public class Undermain : MonoBehaviour
         //this is the battle system it uses the values of the players max damage and a attack roll to determin if the attack hits
         //it also does the same for the enemy
         if (monster != false)
-        {   
+        {               
             if (turn == false && spared != true)
             {
                 Debug.Log("What Will You Deside To Do?");
@@ -305,6 +310,14 @@ public class Undermain : MonoBehaviour
                 Debug.Log("C: Item");
                 Debug.Log("V: Spare");
                 turn = true;
+                if (artifactUsed == true)
+                {
+                    artifactLife = artifactLife - 1;
+                }
+                if (artifactLife <= 0)
+                {
+                    artifactUsed = false;                    
+                }
             }
             if (Input.GetKeyDown(KeyCode.Z) && turn == true)
             {
@@ -324,35 +337,15 @@ public class Undermain : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.C) && turn == true)
             {
+                item = true;
                 ClearLog();
-                Debug.Log("You Choose To Use A Item");                
-                if (playerHealth == playerMaxHealth)
-                {
-                    Debug.Log("You Are Already At Full Health");
-                    turn = false;
-                    SoundEffect(select);
-                }
-                if (food >= 1 && playerHealth != playerMaxHealth)
-                {
-                    SoundEffect(healing);
-                    heal = Random.Range(5, 30);
-                    Debug.Log("You Healed " + heal + "HP!");
-                    turn = false;
-                    item = false;
-                    food = food - 1;
-                    playerHealth = playerHealth + heal; 
-                    if (playerHealth >= playerMaxHealth)
+                Debug.Log("You Choose To Use A Item");                 
+                Debug.Log("What Will You Do?");
+                Debug.Log("A: Heal");
+                    if (artifact == true)
                     {
-                        playerHealth = playerMaxHealth;
-                    }
-                }
-                if (food <=0)
-                {
-                    Debug.Log("You Have No Healing Items On You");
-                    turn = false;
-                    item = false;
-                    SoundEffect(select);
-                }
+                        Debug.Log("S: Use Artifact");
+                    }                
             }
             if (Input.GetKeyDown(KeyCode.V) && turn == true)
             {
@@ -374,6 +367,49 @@ public class Undermain : MonoBehaviour
                 {
                     Debug.Log("The Monster Dosent Like You Enough To Be Spared. Try Acting First");
                     turn = false;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.S) && artifact == true && item == true)
+            {
+                ClearLog();
+                artifactLife = 5;
+                Debug.Log("You Have Chosen To Use The Artifact");
+                Debug.Log("You Have Gained Temperary Imunity For " + artifactLife + " Turns");
+                artifactUsed = true;
+                artifactLife = artifactLife + 1;
+                artifact = false;
+                item = false;
+                turn = false;
+            }
+            if (Input.GetKeyDown(KeyCode.A) && item == true)
+            {
+                ClearLog();
+                if (playerHealth == playerMaxHealth)
+                {
+                    Debug.Log("You Are Already At Full Health");
+                    turn = false;
+                    SoundEffect(select);
+                }
+                if (food >= 1 && playerHealth != playerMaxHealth)
+                {
+                    SoundEffect(healing);
+                    heal = Random.Range(5, 30);
+                    Debug.Log("You Healed " + heal + "HP!");
+                    turn = false;
+                    item = false;
+                    food = food - 1;
+                    playerHealth = playerHealth + heal;
+                    if (playerHealth >= playerMaxHealth)
+                    {
+                        playerHealth = playerMaxHealth;
+                    }
+                }
+                if (food <= 0)
+                {
+                    Debug.Log("You Have No Healing Items On You");
+                    turn = false;
+                    item = false;
+                    SoundEffect(select);
                 }
             }
             if (Input.GetKeyDown(KeyCode.A) && act == true)
@@ -449,12 +485,13 @@ public class Undermain : MonoBehaviour
                     Debug.Log("you killed it");
                     gainedXP = Random.Range(1, 10);
                     playerXP = playerXP + gainedXP;
-                    Debug.Log("You gained: " + gainedXP + "XP");                    
+                    Debug.Log("You gained: " + gainedXP + "XP");
+                    money = money + Random.Range(1, 6);
                 }                
             }
-            if (turn == false && monster == true)
-            {
-                monsterDMG = Random.Range(1, 15);
+            if (turn == false && monster == true && artifactUsed == false)
+            {   
+                monsterDMG = Random.Range(1, 15);                
                 //this is the monster damage calculations
                 if (monsterDMG >= 6 && monsterHealth > 0)
                 {                                        
@@ -585,7 +622,7 @@ public class Undermain : MonoBehaviour
                 backgroundAudioChange(shopSong);
                 SoundEffect(shopEnter);
                 Debug.Log("You Walk Into A Shop. There Is Someone Standing There.");
-                Debug.Log("OH hello there young man how may i help you today human");
+                Debug.Log("OH hello there young man how may i help you today");
                 Debug.Log("Z: Buy Items, X: Chat, C: Leave");
                 break;
             case 4:
@@ -645,6 +682,7 @@ public class Undermain : MonoBehaviour
                                         break;
                                 }                                
                                 food = food + Random.Range(1, 10);
+                                money = money + Random.Range(1, 10);
                                 Debug.Log("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
                                 Debug.Log("You Leap Towards The Chest In A Hurry And Grab Everything You Thought Was Useful");
                                 Debug.Log("You Now Have " + food + " Healing Items!");
@@ -734,14 +772,102 @@ public class Undermain : MonoBehaviour
     }
     //this is the shop system
     void Shop()
-    {     
+    {
+        playerFree = false;
        if (Input.GetKeyDown(KeyCode.Z))
         {
             ClearLog();
             SoundEffect(select);
             Debug.Log("What would you like to buy human");
             Debug.Log("We have plenty of items to choose from");
-
+            Debug.Log("We Have: ");
+            Debug.Log("A. Sword");
+            Debug.Log("S. Healing Items");
+            Debug.Log("D. Rare Artifact");            
+        }
+       if (Input.GetKeyDown(KeyCode.A))
+        {
+            ClearLog();
+            price = 20;
+            Debug.Log("You Have Chosen To Buy The Sword");
+            Debug.Log("Ok human that will be " + price + " G");
+            if (money >= price)
+            {
+                playerMaxDamage = (int)(playerMaxDamage * 1.25);
+                Debug.Log("Ok thanks so much darling. dont go killing anyone with that now");
+                Debug.Log("Anything else i can do ya for");
+                money = money - price;
+                playerWepon = "Sword";
+            }
+            else
+            {
+                Debug.Log("Sorry darlin but ya dont have enough G to buy that");
+                Debug.Log("Anything else i can do ya for");
+            }
+            Debug.Log("We have plenty of items to choose from");
+            Debug.Log("We Have: ");
+            Debug.Log("A. Sword");
+            Debug.Log("S. Healing Items");
+            Debug.Log("D. Rare Artifact");            
+        }
+       if (Input.GetKeyDown(KeyCode.S))
+        {
+            ClearLog();
+            price = 5;
+            Debug.Log("You Have Chosen To Buy Some Healing Items");
+            Debug.Log("Ok human that will be " + price + " G");
+            if (money >= price)
+            {
+                food = food + 5;
+                Debug.Log("Ok thanks so much darling enjoy the food");
+                Debug.Log("Anything else i can do ya for");
+                money = money - price;
+            }
+            else
+            {
+                Debug.Log("Sorry darlin but ya dont have enough G to buy that");
+                Debug.Log("Anything else i can do ya for");
+            }
+            Debug.Log("We have plenty of items to choose from");
+            Debug.Log("We Have: ");
+            Debug.Log("A. Sword");
+            Debug.Log("S. Healing Items");
+            Debug.Log("D. Rare Artifact");            
+        }
+       if (Input.GetKeyDown(KeyCode.D))
+        {
+            ClearLog();
+            price = 100;
+            Debug.Log("You Have Chosen To Buy The Artifact");
+            Debug.Log("Ok human that will be " + price + " G");
+            if (money >= price)
+            {
+                artifact = true;
+                Debug.Log("Ok thanks so much darling enjoy that artifact now");
+                Debug.Log("Anything else i can do ya for");
+                money = money - price;
+            }
+            else
+            {
+                Debug.Log("Sorry darlin but ya dont have enough G to buy that");
+                Debug.Log("Anything else i can do ya for");
+            }
+            Debug.Log("We have plenty of items to choose from");
+            Debug.Log("We Have: ");
+            Debug.Log("A. Sword");
+            Debug.Log("S. Healing Items");
+            Debug.Log("D. Rare Artifact");            
+        }
+       if (Input.GetKeyDown(KeyCode.C))
+        {
+            ClearLog();
+            Debug.Log("You Have Chosen To Leave The Store");
+            Debug.Log("Alright darling you take care now ok");
+            Debug.Log("You Leave The Shop");
+            floorChange = true;
+            playerLock = false;
+            SoundEffect(shopEnter);
+            shop = false;
         }
     }
     // this clears the logs when required e.g when the dialouge is playing (got from the net because i couldnt figure out how to do it)
