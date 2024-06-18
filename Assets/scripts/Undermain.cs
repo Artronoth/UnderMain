@@ -582,7 +582,7 @@ public class Undermain : MonoBehaviour
     void RoomCheck()
     {   
         //this checks the room for ay monsters and chests
-        roomCheck = Random.Range(1, 5);
+        roomCheck = Random.Range(1, 5);        
         switch (roomCheck)
         {
             case 5:
@@ -632,11 +632,26 @@ public class Undermain : MonoBehaviour
                 chest = true;
                 monster = true;
                 switch (chest)
-                {
-                    case true:
+                {                    
+                    case true:                        
                         switch (monster)
                         {
                             case true:
+                                switch (floor)
+                                {
+                                    case 1:
+                                        backgroundAudioChange(battle);
+                                        break;
+                                    case 2:
+                                        backgroundAudioChange(battle2);
+                                        break;
+                                    case 3:
+                                        backgroundAudioChange(battle3);
+                                        break;
+                                    case 4:
+                                        backgroundAudioChange(battle4);
+                                        break;
+                                }                                
                                 food = food + Random.Range(1, 10);
                                 Debug.Log("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
                                 Debug.Log("You Leap Towards The Chest In A Hurry And Grab Everything You Thought Was Useful");
