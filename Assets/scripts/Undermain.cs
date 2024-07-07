@@ -99,6 +99,7 @@ public class Undermain : MonoBehaviour
     public AudioClip kill;
     public AudioClip crit;
     public AudioClip levelUp;
+    public AudioClip win;
     public AudioClip healing;
     #endregion
 
@@ -255,8 +256,7 @@ public class Undermain : MonoBehaviour
             //this is the EXP system
             if (playerXP >= expThreshold)
             {
-                playerXP = playerXP - expThreshold;
-                SoundEffect(levelUp);
+                playerXP = playerXP - expThreshold;                               
                 playerMaxDamage = (int)(playerMaxDamage * 1.25);
                 expThreshold = (int)(expThreshold * 1.5);
                 playerLevel = playerLevel + 1;
@@ -264,6 +264,17 @@ public class Undermain : MonoBehaviour
                 playerHealth = playerMaxHealth;
                 Debug.Log("You Leveled Up!");
                 Debug.Log("You Are Now Level " + playerLevel + "!");
+                if (playerLevel == 5)
+                {
+                    SoundEffect(win);
+                    Debug.Log("You Win!");
+                    Debug.Log("You Can Now Close The Game However If You Want You Can Keep Playing");
+                    Debug.Log("Press F To Keep Playing");
+                }
+                else
+                {
+                    SoundEffect(levelUp);
+                }
             }
         }
         //This Activates Menu System
@@ -398,10 +409,18 @@ public class Undermain : MonoBehaviour
                     turn = false;
                     item = false;
                     food = food - 1;
-                    playerHealth = playerHealth + heal;
+                    playerHealth = playerHealth + heal;                    
                     if (playerHealth >= playerMaxHealth)
                     {
                         playerHealth = playerMaxHealth;
+                    }
+                    if (playerHealth == playerMaxHealth)
+                    {
+                        Debug.Log("Your HP Was Maxed Out!");
+                    }
+                    else
+                    {
+                        Debug.Log("Your HP Is Now " + playerHealth + "!");
                     }
                 }
                 if (food <= 0)
@@ -600,7 +619,17 @@ public class Undermain : MonoBehaviour
             Debug.Log("A: continue with game");
             Debug.Log("S: continue with dialouge and story");
             choice = true;
-        }        
+        }       
+        if (dialougIntro == 9)
+        {
+            Debug.Log("You Enter A Mesterious UnderGround Labatory 'huh this place just keeps on getting weirder'");
+            dialouge = false;
+        }
+        if (dialougIntro >= 10)
+        {
+            Debug.Log("You Are Now On A Floor Moving Frenzy As All Floors Dont Make Sense Anymore And There Is No Way Out");
+            dialouge = false;
+        }
     }
     //this is the room building system
     void Room()
@@ -619,7 +648,10 @@ public class Undermain : MonoBehaviour
                 shop = true;
                 chest = false;
                 monster = false;
-                backgroundAudioChange(shopSong);
+                if (floor <= 4)
+                {
+                    backgroundAudioChange(shopSong);
+                }                
                 SoundEffect(shopEnter);
                 Debug.Log("You Walk Into A Shop. There Is Someone Standing There.");
                 Debug.Log("OH hello there young man how may i help you today");
@@ -746,7 +778,15 @@ public class Undermain : MonoBehaviour
                     playerHealth = playerMaxHealth;
                 }
                 food = food - 1;
-                Debug.Log("You Chose To Use Item U Healed Yourself You Have Healed " + heal + "HP!");
+                Debug.Log("You Chose To Use Item U Healed Yourself, You Have Healed " + heal + "HP!");
+                if (playerHealth == playerMaxHealth)
+                {
+                    Debug.Log("Your HP Was Maxed Out!");
+                }
+                else
+                {
+                    Debug.Log("Your HP Is Now " + playerHealth + "!");
+                }
                 SoundEffect(healing);
                 playerLock = false;
             }                                 

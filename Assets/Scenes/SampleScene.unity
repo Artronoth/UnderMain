@@ -453,6 +453,7 @@ MonoBehaviour:
   kill: {fileID: 8300000, guid: f8c50a9c25c1b4e4faeb6ce3b56856da, type: 3}
   crit: {fileID: 8300000, guid: 0b55325bb4a58aa44a6e18bbbe6f4b6a, type: 3}
   levelUp: {fileID: 8300000, guid: 719daede7005daa48b26d08cda56cbcf, type: 3}
+  win: {fileID: 8300000, guid: 0f4b79c9d00900440b026d27d9074792, type: 3}
   healing: {fileID: 8300000, guid: ba0f0106835d4fd4f82b601bc95053bb, type: 3}
 --- !u!4 &113229016
 Transform:
