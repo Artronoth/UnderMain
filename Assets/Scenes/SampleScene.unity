@@ -404,6 +404,7 @@ MonoBehaviour:
   price: 0
   money: 0
   menu: 0
+  bossFight: 0
   turn: 0
   fight: 0
   act: 0
@@ -417,7 +418,7 @@ MonoBehaviour:
   floorChange: 0
   playerFree: 0
   playerLock: 1
-  introCMP: 0
+  introCMP: 1
   gameStart: 0
   monster: 0
   chest: 0
@@ -440,7 +441,7 @@ MonoBehaviour:
   forthFloorLore: {fileID: 0}
   shopSong: {fileID: 8300000, guid: 88deec582d2d13a42ab3ffec925415e6, type: 3}
   battle: {fileID: 8300000, guid: a844e0229fcc628439cd810f8db8d185, type: 3}
-  battle2: {fileID: 8300000, guid: c1d68d9754f51e240b1ffc34cab6c815, type: 3}
+  battle2: {fileID: 8300000, guid: 71fb1ec5e88ba45458defba5ee3c6b49, type: 3}
   battle3: {fileID: 8300000, guid: 2a8002e5983d13541a6ed7f0eb92c289, type: 3}
   battle4: {fileID: 8300000, guid: a2c1fd67ce639ed47b105e4439ddcc13, type: 3}
   death: {fileID: 8300000, guid: 364b7262366e96c44b90486f7aa5c23e, type: 3}

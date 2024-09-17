@@ -39,8 +39,11 @@ public class Undermain : MonoBehaviour
     public int flirt;
     public int price;
     public int money;
-    public bool menu;
+    public bool menu;    
     public bool turn;
+    public bool bossFight;
+    public bool bossPreCheack;
+    public bool bossFloorCount;
     public bool fight;
     public bool act;
     public bool item;
@@ -156,8 +159,18 @@ public class Undermain : MonoBehaviour
                 choice = false;
                 dialouge = false;
                 floorChange = true;
-                Debug.Log("You Enter A Place Flowing With WaterFalls And Shimering Blue Bugs");
+                dialougIntro = dialougIntro + 2;
                 SoundEffect(select);
+            }
+        }
+        if (bossPreCheack == true)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                ClearLog();
+                bossFight = true;
+                dialouge = false;
+                bossPreCheack = false;
             }
         }
         #endregion
@@ -252,6 +265,12 @@ public class Undermain : MonoBehaviour
                 {
                     floorChange = true;
                 }
+                if (floor == 5)
+                {
+                    bossFloorCount = true;
+                    dialougIntro = 11;
+                    Dialouge(); 
+                }
             }                
             //this is the EXP system
             if (playerXP >= expThreshold)
@@ -298,13 +317,14 @@ public class Undermain : MonoBehaviour
         {
             Debug.Log("Game Over");
             Debug.Log("Y O U  H A V E  T O  S T A Y  D E T E R M I N E D  Y O U N G  O N E");
-            Debug.Log("You Can Restart By Pressing A");
+            Debug.Log("You Can Restart By Pressing Enter");
             playerHealth = baseHealth;
             playerMaxHealth = baseHealth;
             playerLevel = baseLevel;
             playerMaxDamage = baseMaxDamage;
             playerXP = 0;
             expThreshold = 20;
+            gameStart = false;            
             gameOver = false;
             floor = 1;
             dialougIntro = 6;
@@ -312,227 +332,18 @@ public class Undermain : MonoBehaviour
         //this is the battle system it uses the values of the players max damage and a attack roll to determin if the attack hits
         //it also does the same for the enemy
         if (monster != false)
-        {               
-            if (turn == false && spared != true)
-            {
-                Debug.Log("What Will You Deside To Do?");
-                Debug.Log("Z: Fight");
-                Debug.Log("X: Act");
-                Debug.Log("C: Item");
-                Debug.Log("V: Spare");
-                turn = true;
-                if (artifactUsed == true)
-                {
-                    artifactLife = artifactLife - 1;
-                }
-                if (artifactLife <= 0)
-                {
-                    artifactUsed = false;                    
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Z) && turn == true)
-            {
-                ClearLog();
-                fight = true;
-                SoundEffect(select);
-                Debug.Log("You Choose To Fight This Turn");
-            }
-            if (Input.GetKeyDown(KeyCode.X) && turn == true)
-            {
-                ClearLog();
-                act = true;
-                SoundEffect(select);
-                Debug.Log("You Choose To Act");
-                Debug.Log("A: Check");
-                Debug.Log("S: Flirt");
-            }
-            if (Input.GetKeyDown(KeyCode.C) && turn == true)
-            {
-                item = true;
-                ClearLog();
-                Debug.Log("You Choose To Use A Item");                 
-                Debug.Log("What Will You Do?");
-                Debug.Log("A: Heal");
-                    if (artifact == true)
-                    {
-                        Debug.Log("S: Use Artifact");
-                    }                
-            }
-            if (Input.GetKeyDown(KeyCode.V) && turn == true)
-            {
-                ClearLog();
-                Debug.Log("You Choose To Spare The Monster");
-                if (flirt >= 2)
-                {
-                    gainedXP = Random.Range(5, 15);
-                    Debug.Log("You Spared The Monster You Gained " + gainedXP + "EXP!");
-                    monster = false;
-                    turn = false;
-                    spare = false;
-                    SoundEffect(kill);
-                    floorChange = true;
-                    playerXP = playerXP + gainedXP;
-                    flirt = 0;
-                }
-                else
-                {
-                    Debug.Log("The Monster Dosent Like You Enough To Be Spared. Try Acting First");
-                    turn = false;
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.S) && artifact == true && item == true)
-            {
-                ClearLog();
-                artifactLife = 5;
-                Debug.Log("You Have Chosen To Use The Artifact");
-                Debug.Log("You Have Gained Temperary Imunity For " + artifactLife + " Turns");
-                artifactUsed = true;
-                artifactLife = artifactLife + 1;
-                artifact = false;
-                item = false;
-                turn = false;
-            }
-            if (Input.GetKeyDown(KeyCode.A) && item == true)
-            {
-                ClearLog();
-                if (playerHealth == playerMaxHealth)
-                {
-                    Debug.Log("You Are Already At Full Health");
-                    turn = false;
-                    SoundEffect(select);
-                }
-                if (food >= 1 && playerHealth != playerMaxHealth)
-                {
-                    SoundEffect(healing);
-                    heal = Random.Range(5, 30);
-                    Debug.Log("You Healed " + heal + "HP!");
-                    turn = false;
-                    item = false;
-                    food = food - 1;
-                    playerHealth = playerHealth + heal;                    
-                    if (playerHealth >= playerMaxHealth)
-                    {
-                        playerHealth = playerMaxHealth;
-                    }
-                    if (playerHealth == playerMaxHealth)
-                    {
-                        Debug.Log("Your HP Was Maxed Out!");
-                    }
-                    else
-                    {
-                        Debug.Log("Your HP Is Now " + playerHealth + "!");
-                    }
-                }
-                if (food <= 0)
-                {
-                    Debug.Log("You Have No Healing Items On You");
-                    turn = false;
-                    item = false;
-                    SoundEffect(select);
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.A) && act == true)
-            {
-                ClearLog();
-                Debug.Log("This Monster Has Currently " + monsterHealth + "HP And " + monsterDefence + "DF");
-                turn = false;
-                act = false;
-            }
-            if (Input.GetKeyDown(KeyCode.S) && act == true)
-            {
-                ClearLog();
-                Debug.Log("You Give a Flirty Comment");
-                flirt = Random.Range(1, 11);
-                if (flirt >= 5)
-                {
-                    Debug.Log("The Monster Is Flattered By Your Comment");
-                    turn = false;
-                }
-                else
-                {
-                    Debug.Log("The Monster Didnt Seem To Care");
-                    turn = false;
-                }
-                turn = false;
-                act = false;
-            }
-            //this is the demeaner for the attack system
-            if (Input.GetKeyDown(KeyCode.Space) && fight == true)
-            {
-                //this clears the log and makes the rolls for the player and monster
-                ClearLog(); 
-                fight = false;
-                turn = false;
-                Debug.Log("You Swing Your " + playerWepon);
-                playerAttackRoll = Random.Range(1, 21);                 
-                if (playerAttackRoll >= 19)
-                {
-                    //this is for when the player is lucky enough to crit the monster
-                    SoundEffect(crit);
-                    monsterHealth = monsterHealth - playerMaxDamage;
-                    playerDamage = playerMaxDamage;
-                    Debug.Log("YOU CRIT THE MONSTER YOU DID " + playerMaxDamage + " DAMAGE!");
-                    Debug.Log("The Monsters Health Is Now: " + monsterHealth);
-                }   
-                //this is a check to see if the player hits higher then the monster defence stat and how much damage they do
-                if (playerAttackRoll !< 19 && playerAttackRoll > monsterDefence)
-                {   
-                    playerDamage = Random.Range(1, playerMaxDamage);
-                    monsterHealth = monsterHealth - playerDamage;
-                    Debug.Log("You Hit The Monster For: " + playerDamage + " Damage");
-                    Debug.Log("The Monsters Health Is Now: " + monsterHealth);
-                    SoundEffect(hit);
-                }
-                //this is when the player misses
-                if (playerAttackRoll < monsterDefence)
-                {
-                    playerDamage = 0;
-                    Debug.Log("You Missed");
-                    SoundEffect(attack);
-                }
-                
-                //this is for when the monster dies. it gives the player exp from a random range and then resets its health for the next monster (how kind of them)
-                if (monsterHealth <= 0)
-                {
-                    floorChange = true;
-                    SoundEffect(kill);
-                    ClearLog();
-                    monster = false;
-                    monsterHealth = 20;
-                    Debug.Log("You Hit The Monster For: " + playerDamage + " Damage");
-                    Debug.Log("The Monsters Health Is Now: 0");
-                    Debug.Log("you killed it");
-                    gainedXP = Random.Range(1, 10);
-                    playerXP = playerXP + gainedXP;
-                    Debug.Log("You gained: " + gainedXP + "XP");
-                    money = money + Random.Range(1, 6);
-                }                
-            }
-            if (turn == false && monster == true && artifactUsed == false)
-            {   
-                monsterDMG = Random.Range(1, 15);                
-                //this is the monster damage calculations
-                if (monsterDMG >= 6 && monsterHealth > 0)
-                {                                        
-                    playerHealth = playerHealth - monsterDMG;
-                    Debug.Log("the monster hit you for: " + monsterDMG);
-                    Debug.Log("your health is now: " + playerHealth);                    
-                }                                 
-            }
-            //this is for when the player is unfortunate enough to die
-            if (playerHealth <= 0)
-            {
-                playerFree = false;
-                gameOver = true;
-                monster = false;
-                backgroundAudioChange(death);
-            }
-        }
+        {
+            Monster();
+        }        
         else
         {
             turn = false;
             monsterHealth = 20;
             flirt = 0;
+        }
+        if (bossFight != false)
+        {
+            BossFight();
         }
         if (shop == true)
         {
@@ -625,10 +436,29 @@ public class Undermain : MonoBehaviour
             Debug.Log("You Enter A Mesterious UnderGround Labatory 'huh this place just keeps on getting weirder'");
             dialouge = false;
         }
-        if (dialougIntro >= 10)
+        if (dialougIntro == 10)
         {
-            Debug.Log("You Are Now On A Floor Moving Frenzy As All Floors Dont Make Sense Anymore And There Is No Way Out");
+            Debug.Log("You Enter A Place Flowing With WaterFalls And Shimering Blue Bugs");
             dialouge = false;
+        }
+        if (bossFloorCount == true)
+        {
+            Debug.Log("you hear a echoing voice that sounds somewhat familar but you do not know why");
+            Debug.Log("it calls your name beckoning you to aproach it 'Y O U  H U M A N  P L E A S E  C O M E  F O R W A R D'");
+            Debug.Log("Its A Monster But This Time Its.. More Powerful? And Not By A Little Too");
+            Debug.Log("You Feel As If This Monster Infront Of You Has Seen Many Battles In Its Time. You Start To Feel A Sence Of Familiarity Once Again");
+            Debug.Log("Like You Been Here Before");
+            Debug.Log("Like You Fought This Monster Time And Time Again");
+            Debug.Log("However This Isnt The Same Monster That You Remember It Feels Diffrent To You");
+            Debug.Log("Like Its Angery This Time");
+            Debug.Log("You Ready Yourself For A Tough Battle Ahead And Step Forth");
+            Debug.Log("'T H A T  L O O K  O N  Y O U R  F A C E ...  Y O U  R E M E M B E R  M E  D O N T  Y O U  H U M A N'");
+            Debug.Log("'R E A D Y  Y O U R  S E L F  H U M A N  T H I S  M I G H T  B E  Y O U R  F I N A L  F I G H T");
+            Debug.Log("You Hear A Voice In The Distance");
+            Debug.Log("DONT BE WORRIED! YOU GO THIS!");
+            Debug.Log("Even Though You Dont Know Who Just Yelled That You Are Filled With. D E T E R M I N A T I O N");
+            Debug.Log("Press S To Start The BossFight");
+            bossPreCheack = true;
         }
     }
     //this is the room building system
@@ -661,6 +491,7 @@ public class Undermain : MonoBehaviour
                 monster = true;
                 shop = false;
                 turn = true;
+                bossFight = false;
                 Debug.Log("a monster proached you");
                 Debug.Log("What Will You Deside To Do?");
                 Debug.Log("Z: Fight");
@@ -743,6 +574,230 @@ public class Undermain : MonoBehaviour
                 break;
         }
     }
+    //this is the battle system
+    void Monster()
+    {
+        if (turn == false && spared != true)
+        {
+            Debug.Log("What Will You Deside To Do?");
+            Debug.Log("Z: Fight");
+            Debug.Log("X: Act");
+            Debug.Log("C: Item");
+            Debug.Log("V: Spare");
+            turn = true;
+            if (artifactUsed == true)
+            {
+                artifactLife = artifactLife - 1;
+            }
+            if (artifactLife <= 0)
+            {
+                artifactUsed = false;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Z) && turn == true)
+        {
+            ClearLog();
+            fight = true;
+            SoundEffect(select);
+            Debug.Log("You Choose To Fight This Turn");
+        }
+        if (Input.GetKeyDown(KeyCode.X) && turn == true)
+        {
+            ClearLog();
+            act = true;
+            SoundEffect(select);
+            Debug.Log("You Choose To Act");
+            Debug.Log("A: Check");
+            Debug.Log("S: Flirt");
+        }
+        if (Input.GetKeyDown(KeyCode.C) && turn == true)
+        {
+            item = true;
+            ClearLog();
+            Debug.Log("You Choose To Use A Item");
+            Debug.Log("What Will You Do?");
+            Debug.Log("A: Heal");
+            if (artifact == true)
+            {
+                Debug.Log("S: Use Artifact");
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.V) && turn == true)
+        {
+            ClearLog();
+            Debug.Log("You Choose To Spare The Monster");
+            if (flirt >= 2)
+            {
+                gainedXP = Random.Range(5, 15);
+                Debug.Log("You Spared The Monster You Gained " + gainedXP + "EXP!");
+                monster = false;
+                turn = false;
+                spare = false;
+                SoundEffect(kill);
+                floorChange = true;
+                playerXP = playerXP + gainedXP;
+                flirt = 0;
+            }
+            else
+            {
+                Debug.Log("The Monster Dosent Like You Enough To Be Spared. Try Acting First");
+                turn = false;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.S) && artifact == true && item == true)
+        {
+            ClearLog();
+            artifactLife = 5;
+            Debug.Log("You Have Chosen To Use The Artifact");
+            Debug.Log("You Have Gained Temperary Imunity For " + artifactLife + " Turns");
+            artifactUsed = true;
+            artifactLife = artifactLife + 1;
+            artifact = false;
+            item = false;
+            turn = false;
+        }
+        if (Input.GetKeyDown(KeyCode.A) && item == true)
+        {
+            ClearLog();
+            if (playerHealth == playerMaxHealth)
+            {
+                Debug.Log("You Are Already At Full Health");
+                turn = false;
+                SoundEffect(select);
+            }
+            if (food >= 1 && playerHealth != playerMaxHealth)
+            {
+                SoundEffect(healing);
+                heal = Random.Range(5, 30);
+                Debug.Log("You Healed " + heal + "HP!");
+                turn = false;
+                item = false;
+                food = food - 1;
+                playerHealth = playerHealth + heal;
+                if (playerHealth >= playerMaxHealth)
+                {
+                    playerHealth = playerMaxHealth;
+                }
+                if (playerHealth == playerMaxHealth)
+                {
+                    Debug.Log("Your HP Was Maxed Out!");
+                }
+                else
+                {
+                    Debug.Log("Your HP Is Now " + playerHealth + "!");
+                }
+            }
+            if (food <= 0)
+            {
+                Debug.Log("You Have No Healing Items On You");
+                turn = false;
+                item = false;
+                SoundEffect(select);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.A) && act == true)
+        {
+            ClearLog();
+            Debug.Log("This Monster Has Currently " + monsterHealth + "HP And " + monsterDefence + "DF");
+            turn = false;
+            act = false;
+        }
+        if (Input.GetKeyDown(KeyCode.S) && act == true)
+        {
+            ClearLog();
+            Debug.Log("You Give a Flirty Comment");
+            flirt = Random.Range(1, 11);
+            if (flirt >= 5)
+            {
+                Debug.Log("The Monster Is Flattered By Your Comment");
+                turn = false;
+            }
+            else
+            {
+                Debug.Log("The Monster Didnt Seem To Care");
+                turn = false;
+            }
+            turn = false;
+            act = false;
+        }
+        //this is the demeaner for the attack system
+        if (Input.GetKeyDown(KeyCode.Space) && fight == true)
+        {
+            //this clears the log and makes the rolls for the player and monster
+            ClearLog();
+            fight = false;
+            turn = false;
+            Debug.Log("You Swing Your " + playerWepon);
+            playerAttackRoll = Random.Range(1, 21);
+            if (playerAttackRoll >= 19)
+            {
+                //this is for when the player is lucky enough to crit the monster
+                SoundEffect(crit);
+                monsterHealth = monsterHealth - playerMaxDamage;
+                playerDamage = playerMaxDamage;
+                Debug.Log("YOU CRIT THE MONSTER YOU DID " + playerMaxDamage + " DAMAGE!");
+                Debug.Log("The Monsters Health Is Now: " + monsterHealth);
+            }
+            //this is a check to see if the player hits higher then the monster defence stat and how much damage they do
+            if (playerAttackRoll! < 19 && playerAttackRoll > monsterDefence)
+            {
+                playerDamage = Random.Range(1, playerMaxDamage);
+                monsterHealth = monsterHealth - playerDamage;
+                Debug.Log("You Hit The Monster For: " + playerDamage + " Damage");
+                Debug.Log("The Monsters Health Is Now: " + monsterHealth);
+                SoundEffect(hit);
+            }
+            //this is when the player misses
+            if (playerAttackRoll < monsterDefence)
+            {
+                playerDamage = 0;
+                Debug.Log("You Missed");
+                SoundEffect(attack);
+            }
+
+            //this is for when the monster dies. it gives the player exp from a random range and then resets its health for the next monster (how kind of them)
+            if (monsterHealth <= 0)
+            {
+                floorChange = true;
+                SoundEffect(kill);
+                ClearLog();
+                monster = false;
+                monsterHealth = 20;
+                Debug.Log("You Hit The Monster For: " + playerDamage + " Damage");
+                Debug.Log("The Monsters Health Is Now: 0");
+                Debug.Log("you killed it");
+                gainedXP = Random.Range(1, 10);
+                playerXP = playerXP + gainedXP;
+                Debug.Log("You gained: " + gainedXP + "XP");
+                money = money + Random.Range(1, 6);
+            }
+        }
+        if (turn == false && monster == true && artifactUsed == false)
+        {
+            monsterDMG = Random.Range(1, 15);
+            //this is the monster damage calculations
+            if (monsterDMG >= 6 && monsterHealth > 0)
+            {
+                playerHealth = playerHealth - monsterDMG;
+                Debug.Log("the monster hit you for: " + monsterDMG);
+                Debug.Log("your health is now: " + playerHealth);
+            }
+        }
+        //this is for when the player is unfortunate enough to die
+        if (playerHealth <= 0)
+        {
+            playerFree = false;
+            gameOver = true;
+            monster = false;
+            playerLock = true;
+            backgroundAudioChange(death);
+        }
+    }
+    //this is the boss system
+    void BossFight()
+    {
+
+    }
     //this is the menu system
     void Menu()
     {
@@ -796,7 +851,7 @@ public class Undermain : MonoBehaviour
         {
             ClearLog();
             Debug.Log("You Have Chosen To Check Rooms Left");
-            Debug.Log("There Are " + rooms + "Rooms Left Before The Next Floor");
+            Debug.Log("There Are " + rooms + "  Rooms Left Before The Next Floor");
             menu = false;
             playerLock = false;
             SoundEffect(select);            
