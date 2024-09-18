@@ -441,7 +441,7 @@ public class Undermain : MonoBehaviour
             Debug.Log("You Enter A Place Flowing With WaterFalls And Shimering Blue Bugs");
             dialouge = false;
         }
-        if (bossFloorCount == true)
+        if (bossFloorCount == true && dialougIntro ==11)
         {
             Debug.Log("you hear a echoing voice that sounds somewhat familar but you do not know why");
             Debug.Log("it calls your name beckoning you to aproach it 'Y O U  H U M A N  P L E A S E  C O M E  F O R W A R D'");
