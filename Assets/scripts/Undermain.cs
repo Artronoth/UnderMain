@@ -326,6 +326,8 @@ public class Undermain : MonoBehaviour
             expThreshold = 20;
             gameStart = false;            
             gameOver = false;
+            playerLock = true;
+            playerFree = false;
             floor = 1;
             dialougIntro = 6;
         }
