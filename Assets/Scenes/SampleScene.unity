@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -404,8 +404,10 @@ MonoBehaviour:
   price: 0
   money: 0
   menu: 0
-  bossFight: 0
   turn: 0
+  bossFight: 0
+  bossPreCheack: 0
+  bossFloorCount: 0
   fight: 0
   act: 0
   item: 0
@@ -418,7 +420,7 @@ MonoBehaviour:
   floorChange: 0
   playerFree: 0
   playerLock: 1
-  introCMP: 1
+  introCMP: 0
   gameStart: 0
   monster: 0
   chest: 0
