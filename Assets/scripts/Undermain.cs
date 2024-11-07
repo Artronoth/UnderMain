@@ -133,6 +133,7 @@ public class Undermain : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ClearLog();
+                terminal.ClearTerminal();
                 dialougIntro = dialougIntro + 1;
                 Intro();
                 SoundEffect(select);
@@ -148,6 +149,7 @@ public class Undermain : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ClearLog();
+                terminal.ClearTerminal();
                 dialougIntro = dialougIntro + 1;
                 Dialouge();
             }
@@ -381,6 +383,12 @@ public class Undermain : MonoBehaviour
                 Debug.Log("everything was perfect for you in that moment");
                 Debug.Log("untill...");
                 Debug.Log("Press Space To Continue: ");
+                terminal.AddLine("You're at home, sitting in an arm chair, swaying back and forth happily.");
+                terminal.AddLine("You feel as if everything was finally peaceful even though you just got home from work.");
+                terminal.AddLine("Everything was perfect for you in that moment.");
+                terminal.AddLine("Until...");
+                terminal.AddLine("");
+                terminal.AddLine("Press Space To Continue...");
                 backgroundAudioChange(intro);
                 break;
             case 2:
@@ -390,6 +398,13 @@ public class Undermain : MonoBehaviour
                 Debug.Log("once you arive at the kitchen you see the counter top your fridge and some other standerd kitchen stuff");
                 Debug.Log("as you open the fridge you suddenly feel a sharp pain in your chest 'AAHh what the heck!' you say out loud");
                 Debug.Log("Press Space To Continue: ");
+                terminal.AddLine("You start to feel hungry. 'ugg i could really go for some food right about now'");
+                terminal.AddLine("You could head up to the kitchen and go get some food, but the chair is too comfortable. 'uhhgg but i really dont wanna have to get up'");
+                terminal.AddLine("You get out the chair anyway because you are very hungry, after all. 'ok just a little snack wont hurt then i can sit down before the chair gets cold again'");
+                terminal.AddLine("Once you arrive at the kitchen, you see the counter top, your fridge and some other standard kitchen stuff.");
+                terminal.AddLine("As you open the fridge, you suddenly feel a sharp pain in your chest. 'AAHh what the heck!', you say out loud.");
+                terminal.AddLine("");
+                terminal.AddLine("Press Space To Continue...");
                 break;
             case 3:
                 backgroundAudioChange(introTense);
