@@ -10,7 +10,7 @@ using TMPro.EditorUtilities;
 
 public class Undermain : MonoBehaviour
 {
-    public Terminal terminalScript;
+    public Terminal terminal;
     //All Main Variables
     [Header ("Character Stats")]
     #region Variables
@@ -112,18 +112,6 @@ public class Undermain : MonoBehaviour
     {
         Debug.Log("press A to start: ");
         manager = FindObjectOfType<AudioSource>();
-        terminalScript.AddLine("Line 1");
-        terminalScript.AddLine("Line 2");
-        terminalScript.AddLine("Line 3");
-        terminalScript.AddLine("Line 4");
-        terminalScript.AddLine("Line 5");
-        terminalScript.AddLine("Line 6");
-        terminalScript.AddLine("Line 7");
-        terminalScript.AddLine("Line 8");
-        terminalScript.AddLine("Line 9");
-        terminalScript.AddLine("Line 10");
-        terminalScript.AddLine("Line 11");
-        terminalScript.AddLine("Line 12");
     }
 
     // Update is called once per frame
@@ -194,6 +182,8 @@ public class Undermain : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 ClearLog();
+                terminal.ClearTerminal();
+                terminal.AddLine("You enter the ruins.");
                 Debug.Log("you enter the ruins");                
                 SoundEffect(move);
                 playerFree = true;
@@ -202,6 +192,7 @@ public class Undermain : MonoBehaviour
                 Room();
                 roomBuild = false;
                 Debug.Log("you are now free to move around the underground");
+                terminal.AddLine("You are now free to move around the underground.");
                 Debug.Log("Your Movement Controls Are F: To Move, X: To Open Your Inventory Menu, Use (A, S, D) Keys To Interact With The Menu, D: To Cancel Menu Action");
                 floorChange = true;
                 dialougIntro = 6;
@@ -219,7 +210,9 @@ public class Undermain : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 ClearLog();
+                terminal.ClearTerminal();
                 Debug.Log("you have entered a new room");
+                terminal.AddLine("You have entered a new room.");
                 RoomCheck();
                 SoundEffect(move);
                 rooms = rooms - 1;
@@ -227,8 +220,11 @@ public class Undermain : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.X) && menu == false)
             {
                 ClearLog();
+                terminal.ClearTerminal();
                 Debug.Log("You Have Opened The Menu");
+                terminal.AddLine("You have opened the menu.");
                 Debug.Log("What Would You Like To Do");
+                terminal.AddLine("What would you like to do?");
                 Debug.Log("A: Use Item, S: Check Rooms Left, D: Cancel");
                 menu = true;                
             }            
