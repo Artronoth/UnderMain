@@ -44,4 +44,10 @@ public class Terminal : MonoBehaviour
             scrollRect.verticalNormalizedPosition = 0f; // 0 means bottom
         }
     }
+
+    public void ClearTerminal() 
+    {
+        lines.Clear();
+        tmpText.text = "";
+    }
 }
