@@ -7,13 +7,8 @@ public class Terminal : MonoBehaviour
 {
     public TextMeshProUGUI tmpText;
     public List<string> lines = new List<string>();
-    [SerializeField] private int maxLines = 10;
-    private int activeLineAmount = 0;
-    // Start is called before the first frame update
-    void Start()
-    {
-        tmpText.text = "";
-    }
+    [SerializeField] private int maxLines = 16;
+
     public void AddLine(string newLine)
     {
         string newNewLine = newLine + "\n";
@@ -22,7 +17,7 @@ public class Terminal : MonoBehaviour
         {
             lines.RemoveAt(0);
             tmpText.text = "";
-            for (int i = 0; i > lines.Count; i++)
+            for (int i = 0; i < lines.Count; i++)
             {
                 tmpText.text += lines[i];
             }

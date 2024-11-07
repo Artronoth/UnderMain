@@ -105,11 +105,14 @@ public class Undermain : MonoBehaviour
     public AudioClip levelUp;
     public AudioClip win;
     public AudioClip healing;
+    private int num;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+        terminal.ClearTerminal();
+        terminal.AddLine("Press A to start...");
         Debug.Log("press A to start: ");
         manager = FindObjectOfType<AudioSource>();
     }
@@ -133,6 +136,11 @@ public class Undermain : MonoBehaviour
                 dialougIntro = dialougIntro + 1;
                 Intro();
                 SoundEffect(select);
+            }
+
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                terminal.AddLine("Hello there, old man! " + num++);
             }
         }
         if (dialouge == true && choice != true)
