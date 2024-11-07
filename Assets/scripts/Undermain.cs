@@ -10,6 +10,7 @@ using TMPro.EditorUtilities;
 
 public class Undermain : MonoBehaviour
 {
+    public Terminal terminalScript;
     //All Main Variables
     [Header ("Character Stats")]
     #region Variables
@@ -111,6 +112,18 @@ public class Undermain : MonoBehaviour
     {
         Debug.Log("press A to start: ");
         manager = FindObjectOfType<AudioSource>();
+        terminalScript.AddLine("Line 1");
+        terminalScript.AddLine("Line 2");
+        terminalScript.AddLine("Line 3");
+        terminalScript.AddLine("Line 4");
+        terminalScript.AddLine("Line 5");
+        terminalScript.AddLine("Line 6");
+        terminalScript.AddLine("Line 7");
+        terminalScript.AddLine("Line 8");
+        terminalScript.AddLine("Line 9");
+        terminalScript.AddLine("Line 10");
+        terminalScript.AddLine("Line 11");
+        terminalScript.AddLine("Line 12");
     }
 
     // Update is called once per frame
