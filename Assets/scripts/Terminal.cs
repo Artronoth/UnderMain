@@ -13,6 +13,7 @@
 //    function and pass through the new controls. Use this example as a reference for the recommended format:
 //        A=Jump, B=Crouch, X=Reload/Interact, Y=Switch Weapons
 
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,10 +22,17 @@ using UnityEngine.UI;
 public class Terminal : MonoBehaviour
 {
     public TextMeshProUGUI tmpMainText;
-    public TextMeshProUGUI tmpBottomText;
+    public TextMeshProUGUI tmpBottomLeftText;
+    public TextMeshProUGUI tmpBottomRightText;
     public List<string> lines = new List<string>();
+    public bool isTimerActive = true;
     [SerializeField] private int maxLines = 16;
     [SerializeField] private int maxCharsPerLine = 86;
+
+    private void Start()
+    {
+        StartCoroutine(BeginTimer());
+    }
     
     public void AddLine(string newLine)
     {
@@ -89,6 +97,23 @@ public class Terminal : MonoBehaviour
 
     public void UpdateControlScheme(string newScheme)
     {
-        tmpBottomText.text = newScheme;
+        tmpBottomLeftText.text = newScheme;
+    }
+
+    private IEnumerator BeginTimer()
+    {
+        float seconds = 0;
+        float minutes = 0;
+        while (isTimerActive)
+        {
+            seconds += Time.deltaTime;
+            if (seconds >= 60)
+            {
+                minutes++;
+                seconds = 0;
+            }
+            tmpBottomRightText.text = "Undermain [" + minutes + ":" + Mathf.Floor(seconds).ToString("00") + "]";
+            yield return null;
+        }
     }
 }
