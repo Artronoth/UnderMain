@@ -4,9 +4,11 @@
 //
 //    #####  HOW TO USE THIS SCRIPT  #####
 // 1. To print a new line to the screen, use the AddLine(string) function and pass through your dialogue line.
-//    Make sure not to add a line break as the script does it automatically.
-// 2. To clear the terminal, use the ClearTerminal() function. This will clear all of the main text from the
-//    screen.
+//    Make sure not to add a line break as the script does it automatically. For example:
+//        terminal.AddLine("You have now entered the room. What will you do?");
+// 2. To clear the terminal, use the ClearTerminal() function. This will clear all the main text from the
+//    screen. For example:
+//        terminal.ClearTerminal();
 // 3. To change the control scheme displayed at the bottom of the screen, use the UpdateControlScheme(string)
 //    function and pass through the new controls. Use this example as a reference for the recommended format:
 //        A=Jump, B=Crouch, X=Reload/Interact, Y=Switch Weapons
