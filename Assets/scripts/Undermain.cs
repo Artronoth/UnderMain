@@ -112,7 +112,12 @@ public class Undermain : MonoBehaviour
     void Start()
     {
         terminal.ClearTerminal();
+        terminal.AddLine("## UNDERMAIN ##");
+        terminal.AddLine("A text adventure game by Artronoth");
+        terminal.AddLine("With the help of msmith158");
+        terminal.AddLine("");
         terminal.AddLine("Press A to start...");
+        terminal.UpdateControlScheme("A=Begin");
         Debug.Log("press A to start: ");
         manager = FindObjectOfType<AudioSource>();
     }
@@ -204,6 +209,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("you are now free to move around the underground");
                 terminal.AddLine("You are now free to move around the underground.");
                 Debug.Log("Your Movement Controls Are F: To Move, X: To Open Your Inventory Menu, Use (A, S, D) Keys To Interact With The Menu, D: To Cancel Menu Action");
+                terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
                 floorChange = true;
                 dialougIntro = 6;
             }
@@ -222,7 +228,7 @@ public class Undermain : MonoBehaviour
                 ClearLog();
                 terminal.ClearTerminal();
                 Debug.Log("you have entered a new room");
-                terminal.AddLine("You have entered a new room.");
+                terminal.AddLine("you have entered a new room");
                 RoomCheck();
                 SoundEffect(move);
                 rooms = rooms - 1;
@@ -232,9 +238,9 @@ public class Undermain : MonoBehaviour
                 ClearLog();
                 terminal.ClearTerminal();
                 Debug.Log("You Have Opened The Menu");
-                terminal.AddLine("You have opened the menu.");
+                terminal.AddLine("You Have Opened The Menu");
                 Debug.Log("What Would You Like To Do");
-                terminal.AddLine("What would you like to do?");
+                terminal.AddLine("What Would You Like To Do");
                 Debug.Log("A: Use Item, S: Check Rooms Left, D: Cancel");
                 menu = true;                
             }            
@@ -389,6 +395,7 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("Until...");
                 terminal.AddLine("");
                 terminal.AddLine("Press Space To Continue...");
+                terminal.UpdateControlScheme("Space=Continue");
                 backgroundAudioChange(intro);
                 break;
             case 2:
@@ -405,6 +412,7 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("As you open the fridge, you suddenly feel a sharp pain in your chest. 'AAHh what the heck!', you say out loud.");
                 terminal.AddLine("");
                 terminal.AddLine("Press Space To Continue...");
+                terminal.UpdateControlScheme("Space=Continue");
                 break;
             case 3:
                 backgroundAudioChange(introTense);
