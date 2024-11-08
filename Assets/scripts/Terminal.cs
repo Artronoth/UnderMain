@@ -10,8 +10,8 @@
 //    screen. For example:
 //        terminal.ClearTerminal();
 // 3. To change the control scheme displayed at the bottom of the screen, use the UpdateControlScheme(string)
-//    function and pass through the new controls. Use this example as a reference for the recommended format:
-//        A=Jump, B=Crouch, X=Reload/Interact, Y=Switch Weapons
+//    function and pass through the new controls. For example (this example also uses the recommended format):
+//        terminal.UpdateControlScheme("A=Jump, B=Crouch, X=Reload/Interact, Y=Switch Weapons");
 
 using System.Collections;
 using System.Collections.Generic;
