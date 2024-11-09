@@ -37,7 +37,7 @@ public class Terminal : MonoBehaviour
     public void AddLine(string newLine)
     {
         int lineAmounts = DetermineLinesNeeded(newLine.Length);
-        if (lineAmounts > 1)
+        if (lineAmounts > 1) // If 
         {
             List<string> newMultiLines = new List<string>();
             // Thank you Molly for helping with this

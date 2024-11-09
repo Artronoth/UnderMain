@@ -122,8 +122,6 @@ public class Undermain : MonoBehaviour
         terminal.AddLine("                                                                ");
         terminal.AddLine("A text adventure game by Artronoth");
         terminal.AddLine("With the help of msmith158");
-        terminal.AddLine("");
-        terminal.AddLine("Press A to start...");
         terminal.UpdateControlScheme("A=Begin");
         Debug.Log("press A to start: ");
         manager = FindObjectOfType<AudioSource>();
@@ -401,7 +399,6 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("You feel as if everything was finally peaceful even though you just got home from work.");
                 terminal.AddLine("Everything was perfect for you in that moment.");
                 terminal.AddLine("Until...");
-                terminal.AddLine("Press Space To Continue...");
                 terminal.UpdateControlScheme("Space=Continue");
                 backgroundAudioChange(intro);
                 break;
@@ -417,7 +414,6 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("you get out the chair anyway because you are very hungery after all 'ok just a little snack wont hurt then i can sit down before the chair gets cold again'");
                 terminal.AddLine("once you arive at the kitchen you see the counter top your fridge and some other standerd kitchen stuff");
                 terminal.AddLine("as you open the fridge you suddenly feel a sharp pain in your chest 'AAHh what the heck!' you say out loud");
-                terminal.AddLine("Press Space To Continue...");
                 terminal.UpdateControlScheme("Space=Continue");
                 break;
             case 3:
@@ -431,7 +427,6 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("as the feeling continues to get worse you start to see hear a voice in the distance (hey... hey wake up... HEY!.. I DIDNT BRING YOU ALL THIS WAY TO NAP!)");
                 terminal.AddLine("this voice seams familiar but you dont know where you hurd it from 'WHO ARE YOU! *coughing* WHERE ARE YOU! *cough*'");
                 terminal.AddLine("you feel a sharp pain rush to your head 'OH NOT MORE PAIN!' (W A K E  U P !)");
-                terminal.AddLine("Press Space To Continue: ");
                 terminal.UpdateControlScheme("Space=Continue");
                 break;
             case 4:
@@ -446,7 +441,6 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("JAKE: dude finally you wake up. shesh i thought i would have to be sitting here all day. anyway the place of the job should be just up here");
                 terminal.AddLine("as you both head up the mountain you slip and fall into a hole 'AAAHH JAKE' aaannd fall on you back 'Ooof'");
                 terminal.AddLine("after a couple of secconds you stand back up. you can hear jake yelling but you have fallen down too far to hear him");
-                terminal.AddLine("Press Space To Continue");
                 terminal.UpdateControlScheme("Space=Continue");
                 backgroundAudioChange(introWoken);
                 break;
@@ -462,7 +456,6 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("you end up walking forward and enter into a room... there is a flower... its smileing at you...");
                 terminal.AddLine("as you approach the flower it suddenly jerks into the ground and dissapiers saying (Y O U  A R E  N O T  T H E  O N E)");
                 terminal.AddLine("as confused as you are you dont mind it and you head to the this big ruined tower looking thing");
-                terminal.AddLine("Press Space To Continue");
                 terminal.UpdateControlScheme("Space=Continue");
                 break;
             case 6:
@@ -483,9 +476,6 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("[i sadly can no longer be there to help guide you through these ruins fallen one but i hope this sign finds you well]");
                 terminal.AddLine("Toriel");
                 terminal.AddLine("You Now Have A Choice To Make You Can Either Wait For Jake, Continue Through The Ruins Or Read The Sign Again What Shall You Do");
-                terminal.AddLine("Tab: Wait");
-                terminal.AddLine("Enter: Continue");
-                terminal.AddLine("Space: Read Sign");
                 terminal.UpdateControlScheme("Tab=Wait, Enter=Continue, Space=Read Sign");
                 introCMP = true;
                 break;
