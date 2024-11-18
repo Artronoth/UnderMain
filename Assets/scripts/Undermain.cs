@@ -885,12 +885,14 @@ public class Undermain : MonoBehaviour
             if (playerHealth == playerMaxHealth)
             {
                 Debug.Log("You Are Already At Max Health");
+                terminal.AddLine("You Are Already At Max Health");
                 SoundEffect(select);
                 playerLock = false;
             }
             if (food == 0)
             {
                 Debug.Log("You Dont Have Any Healing Items");
+                terminal.AddLine("You Dont Have Any Healing Items");
                 SoundEffect(select);
                 playerLock = false;               
             }
@@ -903,13 +905,16 @@ public class Undermain : MonoBehaviour
                 }
                 food = food - 1;
                 Debug.Log("You Chose To Use Item U Healed Yourself, You Have Healed " + heal + "HP!");
+                terminal.AddLine("You Chose To Use Item U Healed Yourself, You Have Healed " + heal + "HP!");
                 if (playerHealth == playerMaxHealth)
                 {
                     Debug.Log("Your HP Was Maxed Out!");
+                    terminal.AddLine("Your HP Was Maxed Out!");
                 }
                 else
                 {
                     Debug.Log("Your HP Is Now " + playerHealth + "!");
+                    terminal.AddLine("Your HP Is Now " + playerHealth + "!");                    
                 }
                 SoundEffect(healing);
                 playerLock = false;
@@ -921,6 +926,8 @@ public class Undermain : MonoBehaviour
             ClearLog();
             Debug.Log("You Have Chosen To Check Rooms Left");
             Debug.Log("There Are " + rooms + "  Rooms Left Before The Next Floor");
+            terminal.AddLine("You Have Chosen To Check Rooms Left");
+            terminal.AddLine("There Are " + rooms + " Rooms Left Before The Next Floor");
             menu = false;
             playerLock = false;
             SoundEffect(select);            
@@ -928,7 +935,9 @@ public class Undermain : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
         {
             ClearLog();
+            terminal.ClearTerminal();
             Debug.Log("You Closed The Menu");
+            terminal.AddLine("You Closed The Menu");
             playerLock = false;            
             menu = false;            
             SoundEffect(select);            
