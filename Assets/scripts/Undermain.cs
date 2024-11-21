@@ -247,6 +247,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("What Would You Like To Do");
                 terminal.AddLine("What Would You Like To Do");
                 Debug.Log("A: Use Item, S: Check Rooms Left, D: Cancel");
+                terminal.UpdateControlScheme("A: Use Item, S: Check Rooms Left, D: Cancel");
                 menu = true;                
             }            
             //this handles the floor changes and their songs
@@ -312,13 +313,18 @@ public class Undermain : MonoBehaviour
                 playerMaxHealth = (int)(playerMaxHealth * 1.25);
                 playerHealth = playerMaxHealth;
                 Debug.Log("You Leveled Up!");
+                terminal.AddLine("You Leveled Up!");
                 Debug.Log("You Are Now Level " + playerLevel + "!");
+                terminal.AddLine("You Are Now Level " + playerLevel + "!");
                 if (playerLevel == 5)
                 {
                     SoundEffect(win);
                     Debug.Log("You Win!");
+                    terminal.AddLine("You Win!");
                     Debug.Log("You Can Now Close The Game However If You Want You Can Keep Playing");
+                    terminal.AddLine("You Can Now Close The Game However If You Want You Can Keep Playing");
                     Debug.Log("Press F To Keep Playing");
+                    terminal.UpdateControlScheme("Press F To Keep Playing");
                 }
                 else
                 {
@@ -346,8 +352,11 @@ public class Undermain : MonoBehaviour
         if (gameOver != false)
         {
             Debug.Log("Game Over");
+            terminal.AddLine("Game Over");
             Debug.Log("Y O U  H A V E  T O  S T A Y  D E T E R M I N E D  Y O U N G  O N E");
+            terminal.AddLine("Y O U  H A V E  T O  S T A Y  D E T E R M I N E D  Y O U N G  O N E");
             Debug.Log("You Can Restart By Pressing Enter");
+            terminal.UpdateControlScheme("You Can Restart By Pressing Enter");
             playerHealth = baseHealth;
             playerMaxHealth = baseHealth;
             playerLevel = baseLevel;
@@ -544,6 +553,7 @@ public class Undermain : MonoBehaviour
         {
             case 5:
                 ClearLog();
+                terminal.ClearTerminal();
                 shop = true;
                 chest = false;
                 monster = false;
@@ -553,8 +563,11 @@ public class Undermain : MonoBehaviour
                 }                
                 SoundEffect(shopEnter);
                 Debug.Log("You Walk Into A Shop. There Is Someone Standing There.");
+                terminal.AddLine("You Walk Into A Shop. There Is Someone Standing There.");
                 Debug.Log("OH hello there young man how may i help you today");
+                terminal.AddLine("OH hello there young man how may i help you today");
                 Debug.Log("Z: Buy Items, X: Chat, C: Leave");
+                terminal.UpdateControlScheme("Z: Buy Items, X: Chat, C: Leave");
                 break;
             case 4:
                 monster = true;
@@ -562,11 +575,14 @@ public class Undermain : MonoBehaviour
                 turn = true;
                 bossFight = false;
                 Debug.Log("a monster proached you");
+                terminal.AddLine("a monster aproached you");
                 Debug.Log("What Will You Deside To Do?");
+                terminal.AddLine("What Will You Deside To Do?");
                 Debug.Log("Z: Fight");
                 Debug.Log("X: Act");
                 Debug.Log("C: Item");
                 Debug.Log("V: Spare");
+                terminal.UpdateControlScheme("Z: Fight, X: Act, C: Item, V: Spare");
                 monsterDefence = Random.Range(1, 17);
                 switch (monster)
                 {
@@ -616,8 +632,11 @@ public class Undermain : MonoBehaviour
                                 food = food + Random.Range(1, 10);
                                 money = money + Random.Range(1, 10);
                                 Debug.Log("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
+                                terminal.AddLine("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
                                 Debug.Log("You Leap Towards The Chest In A Hurry And Grab Everything You Thought Was Useful");
+                                terminal.AddLine("You Leap Towards The Chest In A Hurry And Grab Everything You Thought Was Useful");
                                 Debug.Log("You Now Have " + food + " Healing Items!");
+                                terminal.AddLine("You Now Have " + food + " Healing Items!");
                                 chest = false;
                                 break;
                         }
@@ -633,8 +652,10 @@ public class Undermain : MonoBehaviour
                         {
                             case false:
                                 Debug.Log("There Is A Chest In This Room 'huh i wonder if it has anything useful");
+                                terminal.AddLine("There Is A Chest In This Room 'huh i wonder if it has anything useful");
                                 food = food + Random.Range(1, 10);
                                 Debug.Log("You grabbed " + food + "Healing Items From The Chest");
+                                terminal.AddLine("You grabbed " + food + "Healing Items From The Chest");
                                 chest = false;
                                 break;
                         }
@@ -649,10 +670,12 @@ public class Undermain : MonoBehaviour
         if (turn == false && spared != true)
         {
             Debug.Log("What Will You Deside To Do?");
+            terminal.AddLine("What Will You Deside To Do?");
             Debug.Log("Z: Fight");
             Debug.Log("X: Act");
             Debug.Log("C: Item");
             Debug.Log("V: Spare");
+            terminal.UpdateControlScheme("Z: Fight, X: Act, C: Item, V: Spare");
             turn = true;
             if (artifactUsed == true)
             {
@@ -666,39 +689,52 @@ public class Undermain : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z) && turn == true)
         {
             ClearLog();
+            terminal.ClearTerminal();
             fight = true;
             SoundEffect(select);
             Debug.Log("You Choose To Fight This Turn");
+            terminal.AddLine("You Choose To Fight This Turn");
         }
         if (Input.GetKeyDown(KeyCode.X) && turn == true)
         {
             ClearLog();
+            terminal.ClearTerminal();
             act = true;
             SoundEffect(select);
             Debug.Log("You Choose To Act");
+            terminal.AddLine("You Choose To Act");
             Debug.Log("A: Check");
             Debug.Log("S: Flirt");
+            terminal.UpdateControlScheme("A: Check, S: Flirt");
         }
         if (Input.GetKeyDown(KeyCode.C) && turn == true)
         {
             item = true;
             ClearLog();
+            terminal.ClearTerminal();
             Debug.Log("You Choose To Use A Item");
+            terminal.AddLine("You Choose To Use A Item");
             Debug.Log("What Will You Do?");
+            terminal.AddLine("What Will You Do?");
             Debug.Log("A: Heal");
+            terminal.UpdateControlScheme("A: Heal");
             if (artifact == true)
             {
                 Debug.Log("S: Use Artifact");
+                terminal.UpdateControlScheme("A: Heal, S: Use Artifact");
             }
         }
         if (Input.GetKeyDown(KeyCode.V) && turn == true)
         {
             ClearLog();
+            terminal.ClearTerminal();
             Debug.Log("You Choose To Spare The Monster");
+            terminal.AddLine("You Choose To Spare The Monster");
             if (flirt >= 2)
             {
                 gainedXP = Random.Range(5, 15);
                 Debug.Log("You Spared The Monster You Gained " + gainedXP + "EXP!");
+                terminal.AddLine("You Spared The Monster You Gained " + gainedXP + "EXP!");
                 monster = false;
                 turn = false;
                 spare = false;
@@ -710,15 +746,19 @@ public class Undermain : MonoBehaviour
             else
             {
                 Debug.Log("The Monster Dosent Like You Enough To Be Spared. Try Acting First");
+                terminal.AddLine("The Monster Dosent Like You Enough To Be Spared. Try Acting First");
                 turn = false;
             }
         }
         if (Input.GetKeyDown(KeyCode.S) && artifact == true && item == true)
         {
             ClearLog();
+            terminal.ClearTerminal();
             artifactLife = 5;
             Debug.Log("You Have Chosen To Use The Artifact");
+            terminal.AddLine("You Have Chosen To Use The Artifact");
             Debug.Log("You Have Gained Temperary Imunity For " + artifactLife + " Turns");
+            terminal.AddLine("You Have Gained Temperary Imunity For " + artifactLife + " Turns");
             artifactUsed = true;
             artifactLife = artifactLife + 1;
             artifact = false;
@@ -731,6 +771,7 @@ public class Undermain : MonoBehaviour
             if (playerHealth == playerMaxHealth)
             {
                 Debug.Log("You Are Already At Full Health");
+                terminal.AddLine("You Are Already At Full Health");
                 turn = false;
                 SoundEffect(select);
             }
@@ -739,6 +780,7 @@ public class Undermain : MonoBehaviour
                 SoundEffect(healing);
                 heal = Random.Range(5, 30);
                 Debug.Log("You Healed " + heal + "HP!");
+                terminal.AddLine("You Healed " + heal + "HP!");
                 turn = false;
                 item = false;
                 food = food - 1;
@@ -750,15 +792,18 @@ public class Undermain : MonoBehaviour
                 if (playerHealth == playerMaxHealth)
                 {
                     Debug.Log("Your HP Was Maxed Out!");
+                    terminal.AddLine("Your HP Was Maxed Out!");
                 }
                 else
                 {
                     Debug.Log("Your HP Is Now " + playerHealth + "!");
+                    terminal.AddLine("Your HP Is Now " + playerHealth + "!");
                 }
             }
             if (food <= 0)
             {
                 Debug.Log("You Have No Healing Items On You");
+                terminal.AddLine("You Have No Healing Items On You");
                 turn = false;
                 item = false;
                 SoundEffect(select);
@@ -767,23 +812,29 @@ public class Undermain : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A) && act == true)
         {
             ClearLog();
+            terminal.ClearTerminal();
             Debug.Log("This Monster Has Currently " + monsterHealth + "HP And " + monsterDefence + "DF");
+            terminal.AddLine("This Monster Has Currently " + monsterHealth + "HP And " + monsterDefence + "DF");
             turn = false;
             act = false;
         }
         if (Input.GetKeyDown(KeyCode.S) && act == true)
         {
             ClearLog();
+            terminal.ClearTerminal();
             Debug.Log("You Give a Flirty Comment");
+            terminal.AddLine("You Give a Flirty Comment");
             flirt = Random.Range(1, 11);
             if (flirt >= 5)
             {
                 Debug.Log("The Monster Is Flattered By Your Comment");
+                terminal.AddLine("The Monster Is Flattered By Your Comment");
                 turn = false;
             }
             else
             {
                 Debug.Log("The Monster Didnt Seem To Care");
+                terminal.AddLine("The Monster Didnt Seem To Care");
                 turn = false;
             }
             turn = false;
@@ -794,9 +845,11 @@ public class Undermain : MonoBehaviour
         {
             //this clears the log and makes the rolls for the player and monster
             ClearLog();
+            terminal.ClearTerminal();
             fight = false;
             turn = false;
             Debug.Log("You Swing Your " + playerWepon);
+            terminal.AddLine("You Swing Your " + playerWepon);
             playerAttackRoll = Random.Range(1, 21);
             if (playerAttackRoll >= 19)
             {
@@ -805,7 +858,9 @@ public class Undermain : MonoBehaviour
                 monsterHealth = monsterHealth - playerMaxDamage;
                 playerDamage = playerMaxDamage;
                 Debug.Log("YOU CRIT THE MONSTER YOU DID " + playerMaxDamage + " DAMAGE!");
+                terminal.AddLine("YOU CRIT THE MONSTER YOU DID " + playerMaxDamage + " DAMAGE!");
                 Debug.Log("The Monsters Health Is Now: " + monsterHealth);
+                terminal.AddLine("The Monsters Health Is Now: " + monsterHealth);
             }
             //this is a check to see if the player hits higher then the monster defence stat and how much damage they do
             if (playerAttackRoll! < 19 && playerAttackRoll > monsterDefence)
@@ -813,7 +868,9 @@ public class Undermain : MonoBehaviour
                 playerDamage = Random.Range(1, playerMaxDamage);
                 monsterHealth = monsterHealth - playerDamage;
                 Debug.Log("You Hit The Monster For: " + playerDamage + " Damage");
+                terminal.AddLine("You Hit The Monster For: " + playerDamage + " Damage");
                 Debug.Log("The Monsters Health Is Now: " + monsterHealth);
+                terminal.AddLine("The Monsters Health Is Now: " + monsterHealth);
                 SoundEffect(hit);
             }
             //this is when the player misses
@@ -821,6 +878,7 @@ public class Undermain : MonoBehaviour
             {
                 playerDamage = 0;
                 Debug.Log("You Missed");
+                terminal.AddLine("You Missed");
                 SoundEffect(attack);
             }
 
@@ -830,15 +888,21 @@ public class Undermain : MonoBehaviour
                 floorChange = true;
                 SoundEffect(kill);
                 ClearLog();
+                terminal.ClearTerminal();
                 monster = false;
                 monsterHealth = 20;
                 Debug.Log("You Hit The Monster For: " + playerDamage + " Damage");
+                terminal.AddLine("You Hit The Monster For: " + playerDamage + " Damage");
                 Debug.Log("The Monsters Health Is Now: 0");
+                terminal.AddLine("The Monsters Health Is Now: 0");
                 Debug.Log("you killed it");
+                terminal.AddLine("you killed it");
                 gainedXP = Random.Range(1, 10);
                 playerXP = playerXP + gainedXP;
                 Debug.Log("You gained: " + gainedXP + "XP");
+                terminal.AddLine("You gained: " + gainedXP + "XP");
                 money = money + Random.Range(1, 6);
+                terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
             }
         }
         if (turn == false && monster == true && artifactUsed == false)
@@ -849,7 +913,9 @@ public class Undermain : MonoBehaviour
             {
                 playerHealth = playerHealth - monsterDMG;
                 Debug.Log("the monster hit you for: " + monsterDMG);
+                terminal.AddLine("the monster hit you for: " + monsterDMG);
                 Debug.Log("your health is now: " + playerHealth);
+                terminal.AddLine("your health is now: " + playerHealth);
             }
         }
         //this is for when the player is unfortunate enough to die
@@ -880,6 +946,7 @@ public class Undermain : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             ClearLog();
+            terminal.ClearTerminal();
             heal = Random.Range(5, 30);
             
             if (playerHealth == playerMaxHealth)
@@ -888,13 +955,15 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("You Are Already At Max Health");
                 SoundEffect(select);
                 playerLock = false;
+                terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
             }
             if (food == 0)
             {
                 Debug.Log("You Dont Have Any Healing Items");
                 terminal.AddLine("You Dont Have Any Healing Items");
                 SoundEffect(select);
-                playerLock = false;               
+                playerLock = false;
+                terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
             }
             if (playerHealth < playerMaxHealth && food > 0)
             {         
@@ -918,6 +987,7 @@ public class Undermain : MonoBehaviour
                 }
                 SoundEffect(healing);
                 playerLock = false;
+                terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
             }                                 
             menu = false;            
         }
@@ -928,6 +998,7 @@ public class Undermain : MonoBehaviour
             Debug.Log("There Are " + rooms + "  Rooms Left Before The Next Floor");
             terminal.AddLine("You Have Chosen To Check Rooms Left");
             terminal.AddLine("There Are " + rooms + " Rooms Left Before The Next Floor");
+            terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
             menu = false;
             playerLock = false;
             SoundEffect(select);            
@@ -938,6 +1009,7 @@ public class Undermain : MonoBehaviour
             terminal.ClearTerminal();
             Debug.Log("You Closed The Menu");
             terminal.AddLine("You Closed The Menu");
+            terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
             playerLock = false;            
             menu = false;            
             SoundEffect(select);            
@@ -950,93 +1022,142 @@ public class Undermain : MonoBehaviour
        if (Input.GetKeyDown(KeyCode.Z))
         {
             ClearLog();
+            terminal.ClearTerminal();
             SoundEffect(select);
             Debug.Log("What would you like to buy human");
+            terminal.AddLine("What would you like to buy human");
             Debug.Log("We have plenty of items to choose from");
+            terminal.AddLine("We have plenty of items to choose from");
             Debug.Log("We Have: ");
+            terminal.AddLine("We Have: ");
             Debug.Log("A. Sword");
+            terminal.AddLine("A Sword For 20G");
             Debug.Log("S. Healing Items");
-            Debug.Log("D. Rare Artifact");            
+            terminal.AddLine("Some Healing Items For 5G Each");
+            Debug.Log("D. Rare Artifact");
+            terminal.AddLine("And This Rare Artifact However This Is Rare And Costs 500G");
+            terminal.UpdateControlScheme("A: Sword, S: Food, D: Rare Artifact");
         }
        if (Input.GetKeyDown(KeyCode.A))
         {
             ClearLog();
+            terminal.ClearTerminal();
             price = 20;
             Debug.Log("You Have Chosen To Buy The Sword");
+            terminal.AddLine("You Have Chosen To Buy The Sword");
             Debug.Log("Ok human that will be " + price + " G");
+            terminal.AddLine("Ok human that will be " + price + " G");
             if (money >= price)
             {
                 playerMaxDamage = (int)(playerMaxDamage * 1.25);
                 Debug.Log("Ok thanks so much darling. dont go killing anyone with that now");
+                terminal.AddLine("Ok thanks so much darling. dont go killing anyone with that now");
                 Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("Anything else i can do ya for");
                 money = money - price;
                 playerWepon = "Sword";
             }
             else
             {
                 Debug.Log("Sorry darlin but ya dont have enough G to buy that");
+                terminal.AddLine("Sorry darlin but ya dont have enough G to buy that");
                 Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("Anything else i can do ya for");
             }
             Debug.Log("We have plenty of items to choose from");
+            terminal.AddLine("We have plenty of items to choose from");
             Debug.Log("We Have: ");
+            terminal.AddLine("We Have: ");
             Debug.Log("A. Sword");
+            terminal.AddLine("A Sword For 20G");
             Debug.Log("S. Healing Items");
-            Debug.Log("D. Rare Artifact");            
+            terminal.AddLine("Some Healing Items For 5G Each");
+            Debug.Log("D. Rare Artifact");
+            terminal.AddLine("And This Rare Artifact However This Is Rare And Costs 500G");
         }
        if (Input.GetKeyDown(KeyCode.S))
         {
             ClearLog();
+            terminal.ClearTerminal();
             price = 5;
             Debug.Log("You Have Chosen To Buy Some Healing Items");
+            terminal.AddLine("You Have Chosen To Buy Some Healing Items");
             Debug.Log("Ok human that will be " + price + " G");
+            terminal.AddLine("Ok human that will be " + price + " G");
             if (money >= price)
             {
                 food = food + 5;
                 Debug.Log("Ok thanks so much darling enjoy the food");
+                terminal.AddLine("Ok thanks so much darling enjoy the food");
                 Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("Anything else i can do ya for");
                 money = money - price;
             }
             else
             {
                 Debug.Log("Sorry darlin but ya dont have enough G to buy that");
+                terminal.AddLine("Sorry darlin but ya dont have enough G to buy that");
                 Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("Anything else i can do ya for");
             }
             Debug.Log("We have plenty of items to choose from");
+            terminal.AddLine("We have plenty of items to choose from");
             Debug.Log("We Have: ");
+            terminal.AddLine("We Have: ");
             Debug.Log("A. Sword");
+            terminal.AddLine("A Sword For 20G");
             Debug.Log("S. Healing Items");
-            Debug.Log("D. Rare Artifact");            
+            terminal.AddLine("Some Healing Items For 5G Each");
+            Debug.Log("D. Rare Artifact");
+            terminal.AddLine("And This Rare Artifact However This Is Rare And Costs 500G");
         }
        if (Input.GetKeyDown(KeyCode.D))
         {
             ClearLog();
+            terminal.ClearTerminal();
             price = 100;
             Debug.Log("You Have Chosen To Buy The Artifact");
+            terminal.AddLine("You Have Chosen To Buy The Artifact");
             Debug.Log("Ok human that will be " + price + " G");
+            terminal.AddLine("Ok human that will be " + price + " G");
             if (money >= price)
             {
                 artifact = true;
                 Debug.Log("Ok thanks so much darling enjoy that artifact now");
+                terminal.AddLine("Ok thanks so much darling enjoy that artifact now");
                 Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("Anything else i can do ya for");
                 money = money - price;
             }
             else
             {
                 Debug.Log("Sorry darlin but ya dont have enough G to buy that");
+                terminal.AddLine("Sorry darlin but ya dont have enough G to buy that");
                 Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("Anything else i can do ya for");
             }
             Debug.Log("We have plenty of items to choose from");
+            terminal.AddLine("We have plenty of items to choose from");
             Debug.Log("We Have: ");
+            terminal.AddLine("We Have: ");
             Debug.Log("A. Sword");
+            terminal.AddLine("A Sword For 20G");
             Debug.Log("S. Healing Items");
-            Debug.Log("D. Rare Artifact");            
+            terminal.AddLine("Some Healing Items For 5G Each");
+            Debug.Log("D. Rare Artifact");
+            terminal.AddLine("And This Rare Artifact However This Is Rare And Costs 500G");
         }
        if (Input.GetKeyDown(KeyCode.C))
         {
             ClearLog();
+            terminal.ClearTerminal();
             Debug.Log("You Have Chosen To Leave The Store");
+            terminal.AddLine("You Have Chosen To Leave The Store");
             Debug.Log("Alright darling you take care now ok");
+            terminal.AddLine("Alright darling you take care now ok");
             Debug.Log("You Leave The Shop");
+            terminal.AddLine("You Leave The Shop");
+            terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
             floorChange = true;
             playerLock = false;
             SoundEffect(shopEnter);
