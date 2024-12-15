@@ -148,7 +148,6 @@ public class Undermain : MonoBehaviour
                 Intro();
                 SoundEffect(select);
             }
-
             if (Input.GetKeyDown(KeyCode.G))
             {
                 terminal.AddLine("Hello there, old man! " + num++);
@@ -507,6 +506,12 @@ public class Undermain : MonoBehaviour
             Debug.Log("What Shal It Be");
             Debug.Log("A: continue with game");
             Debug.Log("S: continue with dialouge and story");
+            terminal.AddLine("You enter the third floor and feel like something seems off here.");
+            terminal.AddLine("There are signs on the walls everywhere.");
+            terminal.AddLine("Some even have projectors on them, but they are too old and glitchy to see what's on them.");
+            terminal.AddLine("You can either read the signs or continue on.");
+            terminal.AddLine("What shall it be?");
+            terminal.UpdateControlScheme("A=Continue On, S=Read the Sign")
             choice = true;
         }       
         if (dialougIntro == 9)
@@ -631,6 +636,7 @@ public class Undermain : MonoBehaviour
                                 }                                
                                 food = food + Random.Range(1, 10);
                                 money = money + Random.Range(1, 10);
+                                terminal.AddLine("a monster aproached you");
                                 Debug.Log("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
                                 terminal.AddLine("You Notice The Chest And The Monster In The Same Room 'Crap i gotta grab that quick'");
                                 Debug.Log("You Leap Towards The Chest In A Hurry And Grab Everything You Thought Was Useful");
