@@ -211,8 +211,8 @@ public class Undermain : MonoBehaviour
                 Room();
                 roomBuild = false;
                 Debug.Log("you are now free to move around the underground");
-                terminal.AddLine("You are now free to move around the underground.");
                 Debug.Log("Your Movement Controls Are F: To Move, X: To Open Your Inventory Menu, Use (A, S, D) Keys To Interact With The Menu, D: To Cancel Menu Action");
+                terminal.AddLine("You are now free to move around the underground.");
                 terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
                 floorChange = true;
                 dialougIntro = 6;
@@ -239,13 +239,14 @@ public class Undermain : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.X) && menu == false)
             {
+                // [i] Terminal lines changed (except control scheme), debug log lines kept the same, change if needed.
                 ClearLog();
                 terminal.ClearTerminal();
                 Debug.Log("You Have Opened The Menu");
-                terminal.AddLine("You Have Opened The Menu");
                 Debug.Log("What Would You Like To Do");
-                terminal.AddLine("What Would You Like To Do");
                 Debug.Log("A: Use Item, S: Check Rooms Left, D: Cancel");
+                terminal.AddLine("You have opened the menu.");
+                terminal.AddLine("What would you like to do?");
                 terminal.UpdateControlScheme("A: Use Item, S: Check Rooms Left, D: Cancel");
                 menu = true;                
             }            
@@ -312,18 +313,19 @@ public class Undermain : MonoBehaviour
                 playerMaxHealth = (int)(playerMaxHealth * 1.25);
                 playerHealth = playerMaxHealth;
                 Debug.Log("You Leveled Up!");
-                terminal.AddLine("You Leveled Up!");
                 Debug.Log("You Are Now Level " + playerLevel + "!");
-                terminal.AddLine("You Are Now Level " + playerLevel + "!");
+                terminal.AddLine("You leveled Up!");
+                terminal.AddLine("You Are Now level " + playerLevel + "!");
                 if (playerLevel == 5)
                 {
+                    // [i] Terminal lines changed, debug log lines kept the same, change if needed.
                     SoundEffect(win);
                     Debug.Log("You Win!");
-                    terminal.AddLine("You Win!");
                     Debug.Log("You Can Now Close The Game However If You Want You Can Keep Playing");
-                    terminal.AddLine("You Can Now Close The Game However If You Want You Can Keep Playing");
                     Debug.Log("Press F To Keep Playing");
-                    terminal.UpdateControlScheme("Press F To Keep Playing");
+                    terminal.AddLine("YOU WIN!");
+                    terminal.AddLine("What would you like to do from here?");
+                    terminal.UpdateControlScheme("F=Keep Playing, ESC=Quit Game");
                 }
                 else
                 {
@@ -350,12 +352,14 @@ public class Undermain : MonoBehaviour
         //this is the game over system
         if (gameOver != false)
         {
+            // [i] Terminal lines changed, debug log lines kept the same, change if needed.
             Debug.Log("Game Over");
-            terminal.AddLine("Game Over");
             Debug.Log("Y O U  H A V E  T O  S T A Y  D E T E R M I N E D  Y O U N G  O N E");
-            terminal.AddLine("Y O U  H A V E  T O  S T A Y  D E T E R M I N E D  Y O U N G  O N E");
             Debug.Log("You Can Restart By Pressing Enter");
-            terminal.UpdateControlScheme("You Can Restart By Pressing Enter");
+            terminal.AddLine("GAME OVER...");
+            terminal.AddLine("");
+            terminal.AddLine("\"Y O U  H A V E  T O  S T A Y  D E T E R M I N E D, Y O U N G  O N E . . .\"");
+            terminal.UpdateControlScheme("ENTER=Restart Game");
             playerHealth = baseHealth;
             playerMaxHealth = baseHealth;
             playerLevel = baseLevel;
