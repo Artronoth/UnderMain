@@ -1,12 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using System.Reflection;
-using System.Xml.Serialization;
-using UnityEngine.UIElements;
-using System.ComponentModel;
-using TMPro.EditorUtilities;
 
 public class Undermain : MonoBehaviour
 {
@@ -232,7 +227,7 @@ public class Undermain : MonoBehaviour
                 ClearLog();
                 terminal.ClearTerminal();
                 Debug.Log("you have entered a new room");
-                terminal.AddLine("you have entered a new room");
+                terminal.AddLine("You enter a new room.");
                 RoomCheck();
                 SoundEffect(move);
                 rooms = rooms - 1;
@@ -247,7 +242,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("A: Use Item, S: Check Rooms Left, D: Cancel");
                 terminal.AddLine("You have opened the menu.");
                 terminal.AddLine("What would you like to do?");
-                terminal.UpdateControlScheme("A: Use Item, S: Check Rooms Left, D: Cancel");
+                terminal.UpdateControlScheme("A=Use Item, S=Check Rooms Left, D=Cancel");
                 menu = true;                
             }            
             //this handles the floor changes and their songs
@@ -421,11 +416,11 @@ public class Undermain : MonoBehaviour
                 Debug.Log("once you arive at the kitchen you see the counter top your fridge and some other standerd kitchen stuff");
                 Debug.Log("as you open the fridge you suddenly feel a sharp pain in your chest 'AAHh what the heck!' you say out loud");
                 Debug.Log("Press Space To Continue: ");
-                terminal.AddLine("you start to feel hungery 'ugg i could really go for some food right about now'");
-                terminal.AddLine("you could head up to the kitchen and go get some food but the chair is too comfortable 'uhhgg but i really dont wanna have to get up'");
-                terminal.AddLine("you get out the chair anyway because you are very hungery after all 'ok just a little snack wont hurt then i can sit down before the chair gets cold again'");
-                terminal.AddLine("once you arive at the kitchen you see the counter top your fridge and some other standerd kitchen stuff");
-                terminal.AddLine("as you open the fridge you suddenly feel a sharp pain in your chest 'AAHh what the heck!' you say out loud");
+                terminal.AddLine("You start to feel hungry. \"Ugg, I could really go for some food right about now\", you moan.");
+                terminal.AddLine("You could head up to the kitchen and get some food, but the chair is too comfortable. \"Uhhgg, but I really don't wanna have to get up\", you complain.");
+                terminal.AddLine("You decide to get out of the chair anyway as you feel like you're starving. \"Okay, just a little snack won't hurt\", you say, \"then I can sit down before the chair gets cold.");
+                terminal.AddLine("Once you arrive at the kitchen, you see the counter top, your friends and some other appliances—the standard kitchen stuff.");
+                terminal.AddLine("As you open the fridge, you suddenly feel a sharp pain in your chest. \"AAHH, what the heck?!\" you cry out loud.");
                 terminal.UpdateControlScheme("Space=Continue");
                 break;
             case 3:
@@ -435,10 +430,14 @@ public class Undermain : MonoBehaviour
                 Debug.Log("this voice seams familiar but you dont know where you hurd it from 'WHO ARE YOU! *coughing* WHERE ARE YOU! *cough*'");
                 Debug.Log("you feel a sharp pain rush to your head 'OH NOT MORE PAIN!' (W A K E  U P !)");
                 Debug.Log("Press Space To Continue: ");                
-                terminal.AddLine("the feeling gets more and more intense as you fall to the floor in pain 'AHHH WHAT IS HAPPENING'");
-                terminal.AddLine("as the feeling continues to get worse you start to see hear a voice in the distance (hey... hey wake up... HEY!.. I DIDNT BRING YOU ALL THIS WAY TO NAP!)");
-                terminal.AddLine("this voice seams familiar but you dont know where you hurd it from 'WHO ARE YOU! *coughing* WHERE ARE YOU! *cough*'");
-                terminal.AddLine("you feel a sharp pain rush to your head 'OH NOT MORE PAIN!' (W A K E  U P !)");
+                terminal.AddLine("The feeling gets more and more intense as you fall to the floor in pain. \"Ahh, what is happening,\" you say.");
+                terminal.AddLine("As the feeling continues to get worse, you start to hear a voice in the distance.");
+                terminal.AddLine("\"Hey... hey, wake up... HEY! I DIDN'T BRING YOU ALL THIS WAY TO NAP!\"");
+                terminal.AddLine("This voice seems familiar but you don't know where it is coming from. \"Who are you?!\" you shout.");
+                terminal.AddLine("You start to cough. \"WHERE ARE YOU?!\" you scream.");
+                terminal.AddLine("You feel a sharp pain rush to your head. \"Ohh, not more pain!\" you groan.");
+                terminal.AddLine("");
+                terminal.AddLine("\"W A K E  U P !\"");
                 terminal.UpdateControlScheme("Space=Continue");
                 break;
             case 4:
@@ -463,9 +462,10 @@ public class Undermain : MonoBehaviour
                 Debug.Log("as you approach the flower it suddenly jerks into the ground and dissapiers saying (Y O U  A R E  N O T  T H E  O N E)");
                 Debug.Log("as confused as you are you dont mind it and you head to the this big ruined tower looking thing");
                 Debug.Log("Press Space To Continue");
-                terminal.AddLine("you shout at the top of your lungs 'JAKE DONT WORRY IM OK GO SEE IF YOU CAN GET HELP FOR ME WHILE I TRY AND FIND A WAY OUT!' jake goes silent");
-                terminal.AddLine("as you look around you dont see anything familiar everything looks like ruins");
-                terminal.AddLine("you end up walking forward and enter into a room... there is a flower... its smileing at you...");
+                terminal.AddLine("You shout at the top of your lungs \"JAKE, DON'T WORRY, I'M OKAY! GO SEE IF YOU CAN FIND HELP WHILE I TRY AND FIND A WAY OUT!\"");
+                terminal.AddLine("Jake goes silent.");
+                terminal.AddLine("Looking around, you don't see anything familiar—everything is in ruins.");
+                terminal.AddLine("You end up walking forward and enter a room. There sits a flower... and it's smiling at you.");
                 terminal.AddLine("as you approach the flower it suddenly jerks into the ground and dissapiers saying (Y O U  A R E  N O T  T H E  O N E)");
                 terminal.AddLine("as confused as you are you dont mind it and you head to the this big ruined tower looking thing");
                 terminal.UpdateControlScheme("Space=Continue");
@@ -515,7 +515,7 @@ public class Undermain : MonoBehaviour
             terminal.AddLine("Some even have projectors on them, but they are too old and glitchy to see what's on them.");
             terminal.AddLine("You can either read the signs or continue on.");
             terminal.AddLine("What shall it be?");
-            terminal.UpdateControlScheme("A=Continue On, S=Read the Sign")
+            terminal.UpdateControlScheme("A=Continue On, S=Read the Sign");
             choice = true;
         }       
         if (dialougIntro == 9)
