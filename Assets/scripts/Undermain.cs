@@ -466,8 +466,9 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("Jake goes silent.");
                 terminal.AddLine("Looking around, you don't see anything familiar—everything is in ruins.");
                 terminal.AddLine("You end up walking forward and enter a room. There sits a flower... and it's smiling at you.");
-                terminal.AddLine("as you approach the flower it suddenly jerks into the ground and dissapiers saying (Y O U  A R E  N O T  T H E  O N E)");
-                terminal.AddLine("as confused as you are you dont mind it and you head to the this big ruined tower looking thing");
+                terminal.AddLine("As you approach the flower, it suddenly disappears into the ground as you hear:");
+                terminal.AddLine("\"Y O U  A R E  N O T  T H E  O N E . . .\"");
+                terminal.AddLine("As confused as you are, you dismiss it and make your way towards what looks like a large ruined tower.");
                 terminal.UpdateControlScheme("Space=Continue");
                 break;
             case 6:
@@ -481,47 +482,52 @@ public class Undermain : MonoBehaviour
                 Debug.Log("Tab: Wait");
                 Debug.Log("Enter: Continue");
                 Debug.Log("Space: Read Sign");
-                terminal.AddLine("as you walk up to this tower there is a sign on the front saying [welcome to the underground a place full of monsters and wonder]");
-                terminal.AddLine("[this place has been built a long time ago howe*%@$#& get out is from reaching the fith floor of this tower");
-                terminal.AddLine("[this is no ordanary place however it was built by humans back during the #@7@$&^*)( times]");
-                terminal.AddLine("[there will be trials there so be careful as you progress the floors things may get more difficult but we believe in you]");
-                terminal.AddLine("[i sadly can no longer be there to help guide you through these ruins fallen one but i hope this sign finds you well]");
-                terminal.AddLine("Toriel");
-                terminal.AddLine("You Now Have A Choice To Make You Can Either Wait For Jake, Continue Through The Ruins Or Read The Sign Again What Shall You Do");
-                terminal.UpdateControlScheme("Tab=Wait, Enter=Continue, Space=Read Sign");
+                terminal.AddLine("As you walk up to the tower, you see a sign in front of it. Some parts of it are unreadable due to age. It reads:");
+                terminal.AddLine("\"Welcome to the underground — a place full of monsters and wonder!\"");
+                terminal.AddLine("\"This is no ordinary place, however it was built by humans back during the #@7@$&^*%! times.\"");
+                terminal.AddLine("\"There will be trials ahead so please be careful. As you progress, the trials will become more difficult, but I believe in you.");
+                terminal.AddLine("I sadly can no longer be there to help guide you through these ruins, fallen one, but I hope this sign finds you well.");
+                terminal.AddLine("— Toriel");
+                terminal.AddLine("");
+                terminal.AddLine("What would you like to do from here?");
+                terminal.UpdateControlScheme("Tab=Wait, Enter=Continue, Space=Read Again");
                 introCMP = true;
                 break;
         }
     }
     void Dialouge()
     {
-        if (dialougIntro == 7)
+        switch (dialougIntro)
         {
-            Debug.Log("You Enter A Snowy Floor 'how did... but how does... you know what this place is weird enough im just not gonna ask.'");
-            dialouge = false;
-        }
-        if (dialougIntro == 8)
-        {
-            backgroundAudioChange(thirdFloorLore);
-            Debug.Log("You Enter The Third Floor But Something Seams Off Here");
-            Debug.Log("There Are Signs On The Walls EveryWhere");
-            Debug.Log("Some Even Have Projecters On Them However They Are Too Old And Glitchy To See Whats On Them");
-            Debug.Log("you can read the signs if you so choos to however you can also continue with the game");
-            Debug.Log("What Shal It Be");
-            Debug.Log("A: continue with game");
-            Debug.Log("S: continue with dialouge and story");
-            terminal.AddLine("You enter the third floor and feel like something seems off here.");
-            terminal.AddLine("There are signs on the walls everywhere.");
-            terminal.AddLine("Some even have projectors on them, but they are too old and glitchy to see what's on them.");
-            terminal.AddLine("You can either read the signs or continue on.");
-            terminal.AddLine("What shall it be?");
-            terminal.UpdateControlScheme("A=Continue On, S=Read the Sign");
-            choice = true;
-        }       
-        if (dialougIntro == 9)
-        {
-            Debug.Log("You Enter A Mesterious UnderGround Labatory 'huh this place just keeps on getting weirder'");
-            dialouge = false;
+            case 7:
+                Debug.Log("You Enter A Snowy Floor 'how did... but how does... you know what this place is weird enough im just not gonna ask.'");
+                terminal.AddLine("You suddenly enter a snowy floor. At this point, you are bewildered.");
+                terminal.AddLine(
+                    "\"How did... but how does...\" You struggle to find the words. \"You know what? This place is weird enough. I'm just not gonna ask.\"");
+                dialouge = false;
+                break;
+            case 8:
+                backgroundAudioChange(thirdFloorLore);
+                Debug.Log("You Enter The Third Floor But Something Seams Off Here");
+                Debug.Log("There Are Signs On The Walls EveryWhere");
+                Debug.Log("Some Even Have Projecters On Them However They Are Too Old And Glitchy To See Whats On Them");
+                Debug.Log("you can read the signs if you so choos to however you can also continue with the game");
+                Debug.Log("What Shal It Be");
+                Debug.Log("A: continue with game");
+                Debug.Log("S: continue with dialouge and story");
+                terminal.AddLine("You enter the third floor and feel like something seems off here.");
+                terminal.AddLine("There are signs on the walls everywhere.");
+                terminal.AddLine("Some even have projectors on them, but they are too old and glitchy to see what's on them.");
+                terminal.AddLine("You can either read the signs or continue on.");
+                terminal.AddLine("What shall it be?");
+                terminal.UpdateControlScheme("A=Continue On, S=Read the Sign");
+                choice = true;
+                break;
+            case 9:
+                Debug.Log("You Enter A Mesterious UnderGround Labatory 'huh this place just keeps on getting weirder'");
+                terminal.AddLine("You enter a mysterious underground laboratory. \"Huh, this place just keeps on getting weirder\", you say to yourself.")
+                dialouge = false;
+                break;
         }
         if (dialougIntro == 10)
         {
