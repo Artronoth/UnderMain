@@ -519,20 +519,52 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("There are signs on the walls everywhere.");
                 terminal.AddLine("Some even have projectors on them, but they are too old and glitchy to see what's on them.");
                 terminal.AddLine("You can either read the signs or continue on.");
-                terminal.AddLine("What shall it be?");
+                terminal.AddLine("What do you want to do here?");
                 terminal.UpdateControlScheme("A=Continue On, S=Read the Sign");
                 choice = true;
                 break;
             case 9:
                 Debug.Log("You Enter A Mesterious UnderGround Labatory 'huh this place just keeps on getting weirder'");
-                terminal.AddLine("You enter a mysterious underground laboratory. \"Huh, this place just keeps on getting weirder\", you say to yourself.")
+                terminal.AddLine(
+                    "You enter a mysterious underground laboratory. \"Huh, this place just keeps on getting weirder\", you say to yourself.");
                 dialouge = false;
                 break;
-        }
-        if (dialougIntro == 10)
-        {
-            Debug.Log("You Enter A Place Flowing With WaterFalls And Shimering Blue Bugs");
-            dialouge = false;
+            case 10:
+                Debug.Log("You Enter A Place Flowing With WaterFalls And Shimering Blue Bugs");
+                terminal.AddLine("[FILL THIS IN WHEN QUESTION ANSWERED: IS THE ROOM A CAVE OR WHAT?");
+                dialouge = false;
+                break;
+            case 11:
+                if (bossFloorCount)
+                {
+                    Debug.Log("you hear a echoing voice that sounds somewhat familar but you do not know why");
+                    Debug.Log("it calls your name beckoning you to aproach it 'Y O U  H U M A N  P L E A S E  C O M E  F O R W A R D'");
+                    Debug.Log("Its A Monster But This Time Its.. More Powerful? And Not By A Little Too");
+                    Debug.Log("You Feel As If This Monster Infront Of You Has Seen Many Battles In Its Time. You Start To Feel A Sence Of Familiarity Once Again");
+                    Debug.Log("Like You Been Here Before");
+                    Debug.Log("Like You Fought This Monster Time And Time Again");
+                    Debug.Log("However This Isnt The Same Monster That You Remember It Feels Diffrent To You");
+                    Debug.Log("Like Its Angery This Time");
+                    Debug.Log("You Ready Yourself For A Tough Battle Ahead And Step Forth");
+                    Debug.Log("'T H A T  L O O K  O N  Y O U R  F A C E ...  Y O U  R E M E M B E R  M E  D O N T  Y O U  H U M A N'");
+                    Debug.Log("'R E A D Y  Y O U R  S E L F  H U M A N  T H I S  M I G H T  B E  Y O U R  F I N A L  F I G H T");
+                    Debug.Log("You Hear A Voice In The Distance");
+                    Debug.Log("DONT BE WORRIED! YOU GO THIS!");
+                    Debug.Log("Even Though You Dont Know Who Just Yelled That You Are Filled With. D E T E R M I N A T I O N");
+                    Debug.Log("Press S To Start The BossFight");
+                    terminal.AddLine("You hear an echoing voice in the room. It sounds somewhat familiar but you don't know why.");
+                    terminal.AddLine(
+                        "It calls your name, beckoning you to approach it. It's deep voice reverberates throughout the entire room.");
+                    terminal.AddLine("\"Y O U ,  H U M A N ...  P L E A S E ,  C O M E  F O R W A R D .\"");
+                    terminal.AddLine("It's another monster, but this time, you can't begin to comprehend it's power.");
+                    terminal.AddLine(
+                        "You feel as if this monster has seen many battles throughout it's time. You start to feel a sense of familiarity once again.");
+                    terminal.AddLine("You feel like you've been here before... many times before... but this monster feels different. It feels angrier.");
+                    terminal.AddLine("\"T H A T  L O O K  O N  Y O U R  F A C E ...  Y O U  R E M E M B E R  M E ,  D O N ' T  Y O U ,  H U M A N ?\"");
+                    terminal.AddLine("\"R E A D Y  Y O U R S E L F ,  H U M A N .  T H I S  M I G H T  B E  Y O U R  F I N A L  F I G H T .\"");
+                    terminal.AddLine("");
+                }
+                break;
         }
         if (bossFloorCount == true && dialougIntro ==11)
         {
