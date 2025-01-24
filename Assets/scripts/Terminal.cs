@@ -34,6 +34,10 @@ public class Terminal : MonoBehaviour
         StartCoroutine(BeginTimer());
     }
     
+    /// <summary>
+    /// Prints a string onto a new line on the terminal interface.
+    /// </summary>
+    /// <param name="newLine"></param>
     public void AddLine(string newLine)
     {
         int lineAmounts = DetermineLinesNeeded(newLine.Length);
@@ -89,12 +93,20 @@ public class Terminal : MonoBehaviour
         return linesNeeded;
     }
 
+    /// <summary>
+    /// Clears all existing lines from the terminal interface.
+    /// </summary>
     public void ClearTerminal() 
     {
         lines.Clear();
         tmpMainText.text = "";
     }
 
+    /// <summary>
+    /// Prints the string to the control scheme panel on the bottom of the terminal interface.
+    /// Recommended format: A=Control1, B=Control2, C=Control3
+    /// </summary>
+    /// <param name="newScheme"></param>
     public void UpdateControlScheme(string newScheme)
     {
         tmpBottomLeftText.text = newScheme;
