@@ -102,6 +102,9 @@ public class Undermain : MonoBehaviour
     public AudioClip healing;
     private int num;
     #endregion
+    // Game state enums
+    #region Enums
+    private enum ShopState { Intro, BuySwordConfirm, BuySwordSuccess, BuySwordFail, BuyHealingConfirm, BuyHealingSuccess, BuyHealingFail, BuyArtifactConfirm, BuyArtifactSuccess, BuyArtifactFail, Outro }
 
     // Start is called before the first frame update
     void Start()
@@ -1185,6 +1188,40 @@ public class Undermain : MonoBehaviour
             shop = false;
         }
     }
+
+    private void ShopDialogue (ShopState state)
+    {
+        switch (state)
+        {
+            case ShopState.Intro:
+                ClearLog();
+                terminal.ClearTerminal();
+                SoundEffect(select);
+                Debug.Log("What would you like to buy human");
+                Debug.Log("We have plenty of items to choose from");
+                Debug.Log("We Have: ");
+                Debug.Log("A. Sword");
+                Debug.Log("S. Healing Items");
+                Debug.Log("D. Rare Artifact");
+                terminal.AddLine("\"What would you like to buy, human? We have plenty of items to choose from.\"");
+                terminal.AddLine("");
+                terminal.AddLine("Sword - 20G");
+                terminal.AddLine("Healing Items - 5G");
+                terminal.AddLine("Rare Artifact - 500G");
+                terminal.UpdateControlScheme("A=Sword, S=Food, D=Rare Artifact");
+                break;
+            case ShopState.BuySwordConfirm:
+                ClearLog();
+                terminal.ClearTerminal();
+                price = 20;
+                Debug.Log("You Have Chosen To Buy The Sword");
+                Debug.Log("Ok human that will be " + price + " G");
+                terminal.AddLine("You Have Chosen To Buy The Sword");
+                terminal.AddLine("Ok human that will be " + price + " G");
+                break;
+        }
+    }
+
     // this clears the logs when required e.g when the dialouge is playing (got from the net because i couldnt figure out how to do it)
     public void ClearLog()
     {
