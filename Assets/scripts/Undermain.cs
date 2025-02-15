@@ -61,6 +61,7 @@ public class Undermain : MonoBehaviour
     public bool artifact;
     public bool artifactUsed;
     public int artifactLife;
+    private bool confirmedForBuy = false;
     #endregion
     //Audio Sources
     #region Audio Sources
@@ -106,6 +107,7 @@ public class Undermain : MonoBehaviour
     // Game state enums
     #region Enums
     private enum ShopState { Intro, IntroWithSword, BuySwordConfirm, BuySwordSuccess, BuyHealingConfirm, BuyHealingSuccess, BuyArtifactConfirm, BuyArtifactSuccess, BuyFail, Outro }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -1045,144 +1047,68 @@ public class Undermain : MonoBehaviour
     void Shop()
     {
         playerFree = false;
-       if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             ClearLog();
             terminal.ClearTerminal();
             SoundEffect(select);
-            Debug.Log("What would you like to buy human");
-            Debug.Log("We have plenty of items to choose from");
-            Debug.Log("We Have: ");
-            Debug.Log("A. Sword");
-            Debug.Log("S. Healing Items");
-            Debug.Log("D. Rare Artifact");
-            terminal.AddLine("\"What would you like to buy, human? We have plenty of items to choose from.\"");
-            terminal.AddLine("");
-            terminal.AddLine("Sword - 20G");
-            terminal.AddLine("Healing Items - 5G");
-            terminal.AddLine("Rare Artifact - 500G");
-            terminal.UpdateControlScheme("A=Sword, S=Food, D=Rare Artifact");
+            ShopDialogue(ShopState.Intro);
         }
-       if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             ClearLog();
             terminal.ClearTerminal();
             price = 20;
-            Debug.Log("You Have Chosen To Buy The Sword");
-            terminal.AddLine("You Have Chosen To Buy The Sword");
-            Debug.Log("Ok human that will be " + price + " G");
-            terminal.AddLine("Ok human that will be " + price + " G");
-            if (money >= price)
+            ShopDialogue(ShopState.BuySwordConfirm);
+            if (money >= price && confirmedForBuy)
             {
                 playerMaxDamage = (int)(playerMaxDamage * 1.25);
-                Debug.Log("Ok thanks so much darling. dont go killing anyone with that now");
-                terminal.AddLine("Ok thanks so much darling. dont go killing anyone with that now");
-                Debug.Log("Anything else i can do ya for");
-                terminal.AddLine("Anything else i can do ya for");
+                ShopDialogue(ShopState.BuySwordSuccess);
                 money = money - price;
                 playerWepon = "Sword";
             }
-            else
+            else if (money < price && confirmedForBuy)
             {
-                Debug.Log("Sorry darlin but ya dont have enough G to buy that");
-                terminal.AddLine("Sorry darlin but ya dont have enough G to buy that");
-                Debug.Log("Anything else i can do ya for");
-                terminal.AddLine("Anything else i can do ya for");
+                ShopDialogue(ShopState.BuyFail);
             }
-            Debug.Log("We have plenty of items to choose from");
-            terminal.AddLine("We have plenty of items to choose from");
-            Debug.Log("We Have: ");
-            terminal.AddLine("We Have: ");
-            Debug.Log("A. Sword");
-            terminal.AddLine("A Sword For 20G");
-            Debug.Log("S. Healing Items");
-            terminal.AddLine("Some Healing Items For 5G Each");
-            Debug.Log("D. Rare Artifact");
-            terminal.AddLine("And This Rare Artifact However This Is Rare And Costs 500G");
         }
-       if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             ClearLog();
             terminal.ClearTerminal();
             price = 5;
-            Debug.Log("You Have Chosen To Buy Some Healing Items");
-            terminal.AddLine("You Have Chosen To Buy Some Healing Items");
-            Debug.Log("Ok human that will be " + price + " G");
-            terminal.AddLine("Ok human that will be " + price + " G");
+            ShopDialogue(ShopState.BuyHealingConfirm);
             if (money >= price)
             {
                 food = food + 5;
-                Debug.Log("Ok thanks so much darling enjoy the food");
-                terminal.AddLine("Ok thanks so much darling enjoy the food");
-                Debug.Log("Anything else i can do ya for");
-                terminal.AddLine("Anything else i can do ya for");
+                ShopDialogue(ShopState.BuyHealingSuccess);
                 money = money - price;
             }
             else
             {
-                Debug.Log("Sorry darlin but ya dont have enough G to buy that");
-                terminal.AddLine("Sorry darlin but ya dont have enough G to buy that");
-                Debug.Log("Anything else i can do ya for");
-                terminal.AddLine("Anything else i can do ya for");
+                ShopDialogue(ShopState.BuyFail);
             }
-            Debug.Log("We have plenty of items to choose from");
-            terminal.AddLine("We have plenty of items to choose from");
-            Debug.Log("We Have: ");
-            terminal.AddLine("We Have: ");
-            Debug.Log("A. Sword");
-            terminal.AddLine("A Sword For 20G");
-            Debug.Log("S. Healing Items");
-            terminal.AddLine("Some Healing Items For 5G Each");
-            Debug.Log("D. Rare Artifact");
-            terminal.AddLine("And This Rare Artifact However This Is Rare And Costs 500G");
         }
-       if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             ClearLog();
             terminal.ClearTerminal();
             price = 100;
-            Debug.Log("You Have Chosen To Buy The Artifact");
-            terminal.AddLine("You Have Chosen To Buy The Artifact");
-            Debug.Log("Ok human that will be " + price + " G");
-            terminal.AddLine("Ok human that will be " + price + " G");
+            ShopDialogue(ShopState.BuyArtifactConfirm);
             if (money >= price)
             {
                 artifact = true;
-                Debug.Log("Ok thanks so much darling enjoy that artifact now");
-                terminal.AddLine("Ok thanks so much darling enjoy that artifact now");
-                Debug.Log("Anything else i can do ya for");
-                terminal.AddLine("Anything else i can do ya for");
+                ShopDialogue(ShopState.BuyArtifactSuccess);
                 money = money - price;
             }
             else
             {
-                Debug.Log("Sorry darlin but ya dont have enough G to buy that");
-                terminal.AddLine("Sorry darlin but ya dont have enough G to buy that");
-                Debug.Log("Anything else i can do ya for");
-                terminal.AddLine("Anything else i can do ya for");
+                ShopDialogue(ShopState.BuyFail);
             }
-            Debug.Log("We have plenty of items to choose from");
-            terminal.AddLine("We have plenty of items to choose from");
-            Debug.Log("We Have: ");
-            terminal.AddLine("We Have: ");
-            Debug.Log("A. Sword");
-            terminal.AddLine("A Sword For 20G");
-            Debug.Log("S. Healing Items");
-            terminal.AddLine("Some Healing Items For 5G Each");
-            Debug.Log("D. Rare Artifact");
-            terminal.AddLine("And This Rare Artifact However This Is Rare And Costs 500G");
         }
        if (Input.GetKeyDown(KeyCode.C))
         {
-            ClearLog();
-            terminal.ClearTerminal();
-            Debug.Log("You Have Chosen To Leave The Store");
-            terminal.AddLine("You Have Chosen To Leave The Store");
-            Debug.Log("Alright darling you take care now ok");
-            terminal.AddLine("Alright darling you take care now ok");
-            Debug.Log("You Leave The Shop");
-            terminal.AddLine("You Leave The Shop");
-            terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
+            ShopDialogue(ShopState.Outro);
             floorChange = true;
             playerLock = false;
             SoundEffect(shopEnter);
@@ -1208,7 +1134,7 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("");
                 terminal.AddLine("Sword - 20G");
                 terminal.AddLine("Healing Items - 5G");
-                terminal.AddLine("Rare Artifact - 500G");
+                terminal.AddLine("Rare Artifact - 100G");
                 terminal.UpdateControlScheme("A=Sword, S=Food, D=Rare Artifact");
                 break;
             case ShopState.IntroWithSword:
@@ -1225,21 +1151,69 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("");
                 terminal.AddLine("Sword Upgrade " + (swordLevel + 1) + " - 20G");
                 terminal.AddLine("Healing Items - 5G");
-                terminal.AddLine("Rare Artifact - 500G");
+                terminal.AddLine("Rare Artifact - 100G");
                 terminal.UpdateControlScheme("A=Sword Upgrade, S=Food, D=Rare Artifact");
                 break;
             case ShopState.BuySwordConfirm:
                 ClearLog();
                 terminal.ClearTerminal();
-                price = 20;
                 Debug.Log("You Have Chosen To Buy The Sword");
                 Debug.Log("Ok human that will be " + price + " G");
                 terminal.AddLine("You have chosen to buy the sword.");
-                terminal.AddLine("Ok human that will be " + price + " G");
+                terminal.AddLine("\"Okay human, that'll be " + price + " G.\"");
                 break;
             case ShopState.BuySwordSuccess:
+                Debug.Log("Ok thanks so much darling. dont go killing anyone with that now");
+                Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("\"Here ya go, thanks so much darling. Don't go killing anyone with that now!\"");
+                terminal.AddLine("\"Anythin' else I can do ya for?\"");
                 break;
-
+            case ShopState.BuyHealingConfirm:
+                Debug.Log("You Have Chosen To Buy Some Healing Items");
+                Debug.Log("Ok human that will be " + price + " G");
+                terminal.AddLine("You have chosen to buy a healing item.");
+                terminal.AddLine("\"Okay human, that'll be " + price + " G.\"");
+                break;
+            case ShopState.BuyHealingSuccess:
+                Debug.Log("Ok thanks so much darling enjoy the food");
+                Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("\"Here ya go, thanks so much darling. Enjoy the food!");
+                terminal.AddLine("\"Anythin' else I can do ya for?\"");
+                break;
+            case ShopState.BuyArtifactConfirm:
+                Debug.Log("You Have Chosen To Buy The Artifact");
+                Debug.Log("Ok human that will be " + price + " G");
+                terminal.AddLine("You have chosen to buy the artifact.");
+                terminal.AddLine("\"Okay human, that'll be " + price + " G.\"");
+                break;
+            case ShopState.BuyArtifactSuccess:
+                Debug.Log("Ok thanks so much darling enjoy that artifact now");
+                Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("\"Here ya go, thanks so much darling. Enjoy that artifact now!");
+                terminal.AddLine("\"Anythin' else I can do ya for?\"");
+                break;
+            case ShopState.BuyFail:
+                Debug.Log("Sorry darlin but ya dont have enough G to buy that");
+                Debug.Log("Anything else i can do ya for");
+                terminal.AddLine("\"Sorry darlin', but ya don't have enough G to buy that.\"");
+                terminal.AddLine("\"Anythin' else I can do ya for?\"");
+                terminal.AddLine("");
+                terminal.AddLine("Sword - 20G");
+                terminal.AddLine("Healing Items - 5G");
+                terminal.AddLine("Rare Artifact - 100G");
+                terminal.UpdateControlScheme("A=Sword Upgrade, S=Food, D=Rare Artifact");
+                break;
+            case ShopState.Outro:
+                ClearLog();
+                terminal.ClearTerminal();
+                Debug.Log("You Have Chosen To Leave The Store");
+                Debug.Log("Alright darling you take care now ok");
+                Debug.Log("You Leave The Shop");
+                terminal.AddLine("You have chosen to leave the shop.");
+                terminal.AddLine("\"Alright darlin', you take care now, okay?\"");
+                terminal.AddLine("You leave the shop.");
+                terminal.UpdateControlScheme("F=Move, X=Inventory, A/S/D=Navigate Menu, D=Cancel Menu");
+                break;
         }
     }
 
