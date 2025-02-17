@@ -248,6 +248,12 @@ public class Undermain : MonoBehaviour
                 Debug.Log("A: Use Item, S: Check Rooms Left, D: Cancel");
                 terminal.AddLine("You have opened the menu.");
                 terminal.AddLine("What would you like to do?");
+                terminal.AddLine("Health = " + playerHealth);
+                terminal.AddLine("Max Damage = " + playerMaxDamage);
+                terminal.AddLine("Level = " + playerLevel);
+                terminal.AddLine("Current EXP = " + gainedXP);
+                terminal.AddLine("EXP required for next LVL = " + expThreshold);
+                terminal.AddLine("G = " + money);
                 terminal.UpdateControlScheme("A=Use Item, S=Check Rooms Left, D=Cancel");
                 menu = true;                
             }            
@@ -286,6 +292,7 @@ public class Undermain : MonoBehaviour
             if (rooms < 0)
             {
                 ClearLog();
+                terminal.ClearTerminal();
                 monster = false;
                 shop = false;
                 floor = floor + 1;                

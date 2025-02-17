@@ -404,6 +404,7 @@ MonoBehaviour:
   flirt: 0
   price: 0
   money: 0
+  swordLevel: 0
   menu: 0
   turn: 0
   bossFight: 0
@@ -421,7 +422,7 @@ MonoBehaviour:
   floorChange: 0
   playerFree: 0
   playerLock: 1
-  introCMP: 0
+  introCMP: 1
   gameStart: 0
   monster: 0
   chest: 0
