@@ -248,7 +248,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("A: Use Item, S: Check Rooms Left, D: Cancel");
                 terminal.AddLine("You have opened the menu.");
                 terminal.AddLine("What would you like to do?");
-                terminal.AddLine("Health = " + playerHealth);
+                terminal.AddLine("Health = " + playerHealth + "/" + playerMaxHealth);
                 terminal.AddLine("Max Damage = " + playerMaxDamage);
                 terminal.AddLine("Level = " + playerLevel);
                 terminal.AddLine("Current EXP = " + gainedXP);
@@ -609,6 +609,7 @@ public class Undermain : MonoBehaviour
                 terminal.AddLine("You walk into a shop. There is someone standing there.");
                 Debug.Log("OH hello there young man how may i help you today");
                 terminal.AddLine("Oh hello there, young man. How may I help you today?");
+                terminal.AddLine("Your G = " + money);
                 Debug.Log("Z: Buy Items, X: Chat, C: Leave");
                 terminal.UpdateControlScheme("Z=Buy Items, X=Chat, C=Leave");
                 break;
@@ -1138,6 +1139,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("S. Healing Items");
                 Debug.Log("D. Rare Artifact");
                 terminal.AddLine("\"What would you like to buy, human? We have plenty of items to choose from.\"");
+                terminal.AddLine("Your G = " + money);
                 terminal.AddLine("");
                 terminal.AddLine("Sword - 20G");
                 terminal.AddLine("Healing Items - 5G");
@@ -1155,6 +1157,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("S. Healing Items");
                 Debug.Log("D. Rare Artifact");
                 terminal.AddLine("\"What would you like to buy, human? We have plenty of items to choose from.\"");
+                terminal.AddLine("Your G = " + money);
                 terminal.AddLine("");
                 terminal.AddLine("Sword Upgrade " + (swordLevel + 1) + " - 20G");
                 terminal.AddLine("Healing Items - 5G");
@@ -1204,6 +1207,7 @@ public class Undermain : MonoBehaviour
                 Debug.Log("Anything else i can do ya for");
                 terminal.AddLine("\"Sorry darlin', but ya don't have enough G to buy that.\"");
                 terminal.AddLine("\"Anythin' else I can do ya for?\"");
+                terminal.AddLine("Your G = " + money);
                 terminal.AddLine("");
                 terminal.AddLine("Sword - 20G");
                 terminal.AddLine("Healing Items - 5G");
