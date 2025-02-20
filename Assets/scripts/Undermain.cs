@@ -1074,6 +1074,10 @@ public class Undermain : MonoBehaviour
                 ShopDialogue(ShopState.BuySwordSuccess);
                 money = money - price;
                 playerWepon = "Sword";
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    ShopDialogue(ShopState.BuySwordSuccess);
+                }
             }
             else if (money < price && confirmedForBuy)
             {
